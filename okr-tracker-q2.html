@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OKR Tracker Q2 2026</title>
+<style>
+@font-face{font-family:'Outfit';font-style:normal;font-weight:100 900;font-display:swap;src:url('fonts/Outfit-VariableFont_wght.ttf') format('truetype');}
+@font-face{font-family:'Aspekta';font-style:normal;font-weight:300;font-display:swap;src:url('fonts/Aspekta-300.woff2') format('woff2');}
+@font-face{font-family:'Aspekta';font-style:normal;font-weight:400;font-display:swap;src:url('fonts/Aspekta-400.woff2') format('woff2');}
+@font-face{font-family:'Aspekta';font-style:normal;font-weight:500;font-display:swap;src:url('fonts/Aspekta-500.woff2') format('woff2');}
+@font-face{font-family:'Aspekta';font-style:normal;font-weight:600;font-display:swap;src:url('fonts/Aspekta-600.woff2') format('woff2');}
+@font-face{font-family:'Aspekta';font-style:normal;font-weight:700;font-display:swap;src:url('fonts/Aspekta-700.woff2') format('woff2');}
+@font-face{font-family:'Aspekta';font-style:normal;font-weight:800;font-display:swap;src:url('fonts/Aspekta-800.woff2') format('woff2');}
+:root{--bg:#1F1F1F;--surf:#2a2a2a;--brd:#3a3a3a;--txt:#F7F7F7;--mut:#777777;--c1:#FF2700;--c2:#63ADF2;--c3:#046865;--c4:#F3C35D;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--bg);color:var(--txt);font-family:'Outfit',sans-serif;min-height:100vh;}
+.page{max-width:1200px;margin:0 auto;padding:48px 32px 100px;}
+
+/* ── OKR base ── */
+.badge{font-family:'Aspekta',sans-serif;font-weight:500;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--c1);background:rgba(255,39,0,.1);border:1px solid rgba(255,39,0,.25);display:inline-block;padding:3px 10px;border-radius:2px;margin-bottom:14px;}
+h1{font-size:clamp(24px,5vw,44px);font-weight:800;letter-spacing:-.03em;line-height:1.05;margin-bottom:6px;}
+h1 em{font-style:normal;color:var(--c1);}
+.sub{font-family:'Aspekta',sans-serif;font-weight:400;font-size:12px;color:var(--mut);margin-bottom:36px;}
+.wcard{background:var(--surf);border:1px solid var(--brd);border-radius:10px;padding:15px 22px;margin-bottom:22px;display:flex;align-items:center;gap:14px;flex-wrap:wrap;}
+.wlbl{font-family:'Aspekta',sans-serif;font-weight:500;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--mut);white-space:nowrap;}
+.pips{display:flex;gap:3px;flex:1;min-width:140px;}
+.pip{flex:1;height:5px;border-radius:1px;background:var(--brd);}
+.pip.past{background:rgba(255,39,0,.4);}
+.pip.cur{background:var(--c1);}
+.winfo{font-family:'Aspekta',sans-serif;font-weight:400;font-size:11px;color:var(--txt);white-space:nowrap;}
+.tcard{background:var(--surf);border:1px solid var(--brd);border-radius:10px;padding:22px 26px;margin-bottom:32px;display:flex;align-items:center;gap:22px;flex-wrap:wrap;}
+.tnum{font-size:48px;font-weight:800;letter-spacing:-.04em;color:var(--c1);line-height:1;}
+.tright{flex:1;min-width:160px;}
+.tlbl{font-family:'Aspekta',sans-serif;font-weight:500;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--mut);margin-bottom:8px;}
+.btrack{height:6px;background:var(--brd);border-radius:3px;overflow:hidden;margin-bottom:6px;}
+.bfill{height:100%;border-radius:3px;background:linear-gradient(90deg,var(--c1),var(--c2));transition:width .5s;}
+.bdates{display:flex;justify-content:space-between;font-family:'Aspekta',sans-serif;font-weight:400;font-size:10px;color:var(--mut);}
+.ocard{background:var(--surf);border:1px solid var(--brd);border-radius:10px;margin-bottom:16px;overflow:hidden;transition:border-color .2s;}
+.ocard:hover{border-color:rgba(255,39,0,.35);}
+.ohead{padding:18px 20px 10px;cursor:pointer;display:flex;align-items:flex-start;gap:13px;user-select:none;}
+.odot{width:9px;height:9px;border-radius:50%;flex-shrink:0;margin-top:5px;}
+.ohb{flex:1;}
+.otitle{font-size:14px;font-weight:700;line-height:1.3;margin-bottom:5px;}
+.ometa{display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
+.opct{font-family:'Aspekta',sans-serif;font-weight:700;font-size:20px;line-height:1;}
+.ntop{font-family:'Aspekta',sans-serif;font-weight:400;font-size:10px;color:var(--mut);}
+.sbdg{font-family:'Aspekta',sans-serif;font-weight:600;font-size:9px;letter-spacing:.14em;text-transform:uppercase;padding:2px 7px;border-radius:2px;border:1px solid;}
+.s-on{color:#046865;border-color:rgba(4,104,101,.4);background:rgba(4,104,101,.1);}
+.s-risk{color:#F3C35D;border-color:rgba(243,195,93,.3);background:rgba(243,195,93,.07);}
+.s-off{color:#FF2700;border-color:rgba(255,39,0,.3);background:rgba(255,39,0,.07);}
+.obarrow{padding:0 20px 12px;}
+.otrack{height:3px;background:var(--brd);border-radius:2px;overflow:hidden;}
+.ofill{height:100%;border-radius:2px;transition:width .5s;}
+.chev{width:17px;height:17px;color:var(--mut);transition:transform .22s;flex-shrink:0;margin-top:3px;}
+.ocard.open .chev{transform:rotate(180deg);}
+.topics{display:none;border-top:1px solid var(--brd);}
+.ocard.open .topics{display:block;}
+.topic{padding:15px 20px;border-bottom:1px solid rgba(58,58,58,.6);}
+.topic:last-child{border-bottom:none;}
+.thead{display:flex;align-items:baseline;gap:8px;margin-bottom:10px;flex-wrap:wrap;}
+.tname{font-size:13px;font-weight:600;flex:1;min-width:80px;}
+.tweight{font-family:'Aspekta',sans-serif;font-weight:400;font-size:10px;color:var(--mut);white-space:nowrap;}
+.tval{font-family:'Aspekta',sans-serif;font-weight:700;font-size:14px;white-space:nowrap;min-width:36px;text-align:right;transition:color .2s;}
+input[type=range]{-webkit-appearance:none;width:100%;height:4px;border-radius:2px;outline:none;cursor:pointer;background:var(--brd);display:block;margin-bottom:4px;}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:15px;height:15px;border-radius:50%;background:#fff;border:2px solid;cursor:pointer;transition:transform .15s;}
+input[type=range]:hover::-webkit-slider-thumb{transform:scale(1.2);}
+.slends{display:flex;justify-content:space-between;font-family:'Aspekta',sans-serif;font-weight:400;font-size:9px;color:var(--mut);margin-bottom:10px;}
+.act{display:flex;align-items:flex-start;gap:7px;padding:4px 0;border-bottom:1px solid rgba(58,58,58,.5);}
+.act:last-child{border-bottom:none;}
+.adot{width:3px;height:3px;border-radius:50%;background:var(--mut);flex-shrink:0;margin-top:7px;}
+.atxt{font-family:'Aspekta',sans-serif;font-weight:400;font-size:10px;color:var(--mut);line-height:1.5;flex:1;}
+.aresp{font-family:'Aspekta',sans-serif;font-weight:600;font-size:9px;color:var(--c4);background:rgba(243,195,93,.08);padding:1px 5px;border-radius:2px;white-space:nowrap;}
+.rbtn{font-family:'Aspekta',sans-serif;font-weight:500;font-size:10px;letter-spacing:.12em;text-transform:uppercase;background:none;border:1px solid var(--brd);color:var(--mut);padding:8px 16px;border-radius:4px;cursor:pointer;transition:all .2s;margin-top:28px;display:block;}
+.rbtn:hover{border-color:var(--c2);color:var(--c2);}
+
+/* ── Section divider ── */
+.sec-hdr{font-family:'Aspekta',sans-serif;font-weight:700;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--mut);border-top:1px solid var(--brd);padding-top:44px;margin:52px 0 24px;}
+
+/* ── Responsabilidades por OKR ── */
+.rsp-card{background:var(--surf);border:1px solid var(--brd);border-radius:10px;margin-bottom:12px;overflow:hidden;}
+.rsp-head{padding:14px 20px;display:flex;align-items:center;gap:12px;cursor:pointer;user-select:none;}
+.rsp-head:hover{background:rgba(255,255,255,.02);}
+.rsp-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
+.rsp-title{font-size:13px;font-weight:700;flex:1;line-height:1.3;}
+.rsp-owner{font-family:'Aspekta',sans-serif;font-weight:700;font-size:9px;letter-spacing:.12em;text-transform:uppercase;padding:3px 9px;border-radius:3px;border:1px solid;white-space:nowrap;}
+.rsp-owner.o-anto{color:var(--c1);border-color:rgba(255,39,0,.4);background:rgba(255,39,0,.08);}
+.rsp-owner.o-ale{color:var(--c2);border-color:rgba(99,173,242,.4);background:rgba(99,173,242,.08);}
+.rsp-chev{width:15px;height:15px;color:var(--mut);transition:transform .2s;flex-shrink:0;}
+.rsp-card.open .rsp-chev{transform:rotate(180deg);}
+.rsp-body{display:none;border-top:1px solid var(--brd);}
+.rsp-card.open .rsp-body{display:block;}
+.rsp-topic{border-top:1px solid rgba(58,58,58,.5);}
+.rsp-topic-hdr{padding:9px 20px;display:flex;align-items:center;gap:8px;cursor:pointer;user-select:none;font-family:'Aspekta',sans-serif;font-weight:700;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--mut);background:rgba(255,255,255,.02);}
+.rsp-topic-hdr:hover{background:rgba(255,255,255,.035);}
+.rsp-topic-chev{width:12px;height:12px;color:var(--mut);transition:transform .18s;margin-left:auto;flex-shrink:0;}
+.rsp-topic.open .rsp-topic-chev{transform:rotate(180deg);}
+.rsp-topic-rows{display:none;}
+.rsp-topic.open .rsp-topic-rows{display:block;}
+.rsp-row{display:flex;align-items:center;gap:10px;padding:8px 20px 8px 28px;border-top:1px solid rgba(58,58,58,.3);}
+.rsp-task{font-family:'Aspekta',sans-serif;font-weight:400;font-size:12px;color:var(--txt);flex:1;line-height:1.4;}
+.rsp-inp{background:var(--bg);border:1px solid var(--brd);border-radius:4px;color:var(--txt);font-family:'Aspekta',sans-serif;font-size:10px;font-weight:500;padding:4px 9px;width:120px;outline:none;transition:border-color .15s;flex-shrink:0;}
+.rsp-inp:focus{border-color:rgba(255,39,0,.4);}
+.rsp-inp::placeholder{color:var(--mut);font-weight:400;}
+
+/* ── Timeline ── */
+.tl-legend{display:flex;gap:18px;margin-bottom:14px;}
+.tl-leg-item{display:flex;align-items:center;gap:7px;font-family:'Aspekta',sans-serif;font-weight:500;font-size:11px;color:var(--mut);}
+.tl-leg-dot{width:12px;height:8px;border-radius:2px;}
+.tl-wrap{background:var(--surf);border:1px solid var(--brd);border-radius:10px;overflow:hidden;margin-bottom:0;}
+.tl-inner{width:100%;}
+.tl-mrow{display:grid;grid-template-columns:180px repeat(13,1fr);border-bottom:1px solid rgba(58,58,58,.6);background:rgba(255,255,255,.025);}
+.tl-mspan{font-family:'Aspekta',sans-serif;font-weight:700;font-size:9px;letter-spacing:.14em;text-transform:uppercase;padding:6px 0;text-align:center;border-left:2px solid var(--brd);}
+.tl-mspan.abril{color:var(--mut);}
+.tl-mspan.mayo{color:var(--c2);border-left-color:rgba(99,173,242,.4);}
+.tl-mspan.junio{color:var(--c4);border-left-color:rgba(243,195,93,.4);}
+.tl-hrow{display:grid;grid-template-columns:180px repeat(13,1fr);border-bottom:1px solid var(--brd);background:rgba(255,255,255,.03);}
+.tl-hcell{font-family:'Aspekta',sans-serif;font-weight:600;font-size:9px;letter-spacing:.05em;color:var(--mut);padding:7px 0 6px;text-align:center;border-left:1px solid var(--brd);display:flex;flex-direction:column;align-items:center;gap:2px;}
+.tl-hcell:first-child{border-left:none;padding-left:16px;align-items:flex-start;justify-content:center;font-size:10px;letter-spacing:.08em;}
+.tl-hdate{font-family:'Aspekta',sans-serif;font-weight:400;font-size:8px;opacity:.55;}
+.tl-erow{display:grid;grid-template-columns:180px 1fr;border-bottom:1px solid var(--brd);min-height:44px;}
+.tl-erow:last-child{border-bottom:none;}
+.tl-erow.tl-events{min-height:62px;}
+.tl-elbl{padding:10px 16px;border-right:1px solid var(--brd);display:flex;flex-direction:column;justify-content:center;}
+.tl-ecode{font-family:'Aspekta',sans-serif;font-weight:700;font-size:9px;letter-spacing:.1em;color:var(--mut);}
+.tl-ename{font-size:12px;font-weight:600;line-height:1.2;}
+.tl-bars-area{position:relative;display:grid;grid-template-columns:repeat(13,1fr);}
+.tl-wk-bg{border-left:1px solid rgba(58,58,58,.5);}
+.tl-wk-bg:first-child{border-left:none;}
+.tl-wk-bg.mayo{background:rgba(99,173,242,.025);}
+.tl-wk-bg.junio{background:rgba(243,195,93,.02);}
+.tl-bar{height:20px;border-radius:3px;position:absolute;top:50%;transform:translateY(-50%);}
+.tl-bar.senior{background:rgba(255,39,0,.25);border:1px solid rgba(255,39,0,.5);}
+.tl-bar.junior{background:rgba(99,173,242,.25);border:1px solid rgba(99,173,242,.5);}
+.tl-bar.ambos{background:rgba(243,195,93,.25);border:1px solid rgba(243,195,93,.5);}
+.ev-chip{position:absolute;font-family:'Aspekta',sans-serif;font-weight:600;font-size:8px;letter-spacing:.05em;text-transform:uppercase;padding:2px 5px;border-radius:2px;white-space:nowrap;}
+.ev-anto{background:rgba(255,39,0,.12);color:var(--c1);border:1px solid rgba(255,39,0,.3);}
+.ev-ale{background:rgba(99,173,242,.12);color:var(--c2);border:1px solid rgba(99,173,242,.3);}
+.ev-warn{background:rgba(243,195,93,.12);color:var(--c4);border:1px solid rgba(243,195,93,.3);}
+.ev-muted{background:rgba(120,120,120,.08);color:var(--mut);border:1px solid rgba(120,120,120,.2);}
+
+
+/* ── Risks + Highlights ── */
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:0;background:var(--surf);border:1px solid var(--brd);border-radius:10px;overflow:hidden;}
+@media(max-width:700px){.two-col{grid-template-columns:1fr;}}
+.two-col-side{padding:24px;}
+.two-col-side+.two-col-side{border-left:1px solid var(--brd);}
+@media(max-width:700px){.two-col-side+.two-col-side{border-left:none;border-top:1px solid var(--brd);}}
+.col-hdr{font-family:'Aspekta',sans-serif;font-weight:700;font-size:10px;letter-spacing:.14em;text-transform:uppercase;margin-bottom:18px;display:flex;align-items:center;gap:7px;}
+.col-hdr.warn{color:var(--c4);}
+.col-hdr.good{color:var(--c3);}
+.risk-list{display:flex;flex-direction:column;gap:11px;}
+.ritem{display:flex;align-items:flex-start;gap:9px;font-family:'Aspekta',sans-serif;font-weight:400;font-size:12px;color:var(--mut);line-height:1.55;}
+.ritem-icon{color:var(--c4);flex-shrink:0;margin-top:2px;font-size:11px;}
+.hlist{display:flex;flex-direction:column;gap:6px;}
+.hitem{display:flex;align-items:flex-start;gap:10px;padding:7px 10px;border-radius:6px;cursor:pointer;transition:background .15s;}
+.hitem:hover{background:rgba(255,255,255,.03);}
+.hcheck{width:17px;height:17px;border:1.5px solid rgba(4,104,101,.4);border-radius:4px;flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:all .2s;margin-top:1px;}
+.hitem.done .hcheck{background:var(--c3);border-color:var(--c3);}
+.hcheck svg{width:10px;height:10px;stroke:#fff;opacity:0;transition:opacity .15s;}
+.hitem.done .hcheck svg{opacity:1;}
+.htxt{font-family:'Aspekta',sans-serif;font-weight:400;font-size:12px;color:var(--txt);line-height:1.5;transition:color .2s;}
+.hitem.done .htxt{color:var(--mut);text-decoration:line-through;}
+
+/* ── Checks & Notes ── */
+.act-ck{width:14px;height:14px;border:1.5px solid var(--brd);border-radius:3px;flex-shrink:0;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .15s;margin-top:4px;}
+.act-ck:hover{border-color:var(--c3);}
+.act.ck-done .act-ck{background:var(--c3);border-color:var(--c3);}
+.act.ck-done .atxt{text-decoration:line-through;color:rgba(119,119,119,.55);}
+.act-ck svg{width:8px;height:8px;stroke:#fff;opacity:0;transition:opacity .12s;}
+.act.ck-done .act-ck svg{opacity:1;}
+.okr-notes-area{border-top:1px solid var(--brd);padding:14px 20px;}
+.notes-lbl{font-family:'Aspekta',sans-serif;font-weight:700;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--mut);margin-bottom:8px;}
+.notes-ta{width:100%;background:rgba(0,0,0,.25);border:1px solid var(--brd);border-radius:6px;color:var(--txt);font-family:'Aspekta',sans-serif;font-size:12px;line-height:1.5;padding:10px 12px;resize:vertical;min-height:64px;outline:none;transition:border-color .15s;}
+.notes-ta:focus{border-color:rgba(255,39,0,.3);}
+.notes-ta::placeholder{color:var(--mut);}
+/* ── Edit mode FAB ── */
+.em-fab{position:fixed;bottom:28px;right:28px;background:var(--surf);border:1px solid var(--brd);border-radius:8px;color:var(--mut);padding:10px 18px;cursor:pointer;font-family:'Aspekta',sans-serif;font-weight:600;font-size:10px;letter-spacing:.1em;text-transform:uppercase;display:flex;align-items:center;gap:8px;transition:all .2s;z-index:200;box-shadow:0 4px 20px rgba(0,0,0,.5);}
+.em-fab:hover{border-color:var(--c1);color:var(--c1);}
+.em-fab.active{border-color:var(--c3);color:var(--c3);background:rgba(4,104,101,.1);}
+.em-fab svg{width:13px;height:13px;}
+/* ── Last update ── */
+.last-upd{font-family:'Aspekta',sans-serif;font-weight:400;font-size:10px;color:rgba(119,119,119,.45);display:inline-block;margin-left:12px;}
+/* ── Edit-only elements ── */
+.edit-only{display:none!important;}
+body.edit-mode .edit-only{display:flex!important;}
+.edit-only-block{display:none!important;}
+body.edit-mode .edit-only-block{display:block!important;}
+/* ── Add / Remove items ── */
+.item-rm{background:none;border:none;color:rgba(255,39,0,.35);cursor:pointer;font-size:15px;padding:0 2px;line-height:1;flex-shrink:0;transition:color .15s;}
+.item-rm:hover{color:var(--c1);}
+.add-row{padding-top:10px;}
+.add-inp{width:100%;background:var(--bg);border:1px dashed var(--brd);border-radius:4px;color:var(--txt);font-family:'Aspekta',sans-serif;font-size:12px;padding:7px 10px;outline:none;transition:border-color .15s;}
+.add-inp:focus{border-color:rgba(255,39,0,.3);}
+.add-inp::placeholder{color:var(--mut);}
+/* ── Editable text in edit mode ── */
+body.edit-mode .editable-txt{outline:1px dashed rgba(255,255,255,.08);border-radius:2px;cursor:text;padding:1px 3px;margin:-1px -3px;}
+body.edit-mode .editable-txt:focus{outline:1px solid rgba(255,39,0,.35);background:rgba(255,39,0,.04);}
+/* ── Toast ── */
+.save-toast{position:fixed;bottom:80px;right:28px;background:var(--surf);border:1px solid var(--c3);color:var(--c3);font-family:'Aspekta',sans-serif;font-weight:600;font-size:11px;letter-spacing:.1em;padding:10px 18px;border-radius:6px;z-index:999;opacity:0;transform:translateY(8px);transition:all .3s;pointer-events:none;}
+.save-toast.show{opacity:1;transform:translateY(0);}
+
+/* ── Hero ── */
+.hero-wrap{background:url('andes.jpg') center 22%/cover no-repeat;position:relative;}
+.hero-wrap::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,rgba(10,10,10,.62) 0%,rgba(10,10,10,.78) 45%,#1F1F1F 100%);pointer-events:none;}
+.hero-wrap .page{position:relative;z-index:1;padding-bottom:48px;}
+.hero-wrap h1{text-shadow:0 2px 24px rgba(0,0,0,.8);}
+.hero-wrap .sub{text-shadow:0 1px 8px rgba(0,0,0,.9);}
+.hero-wrap .badge{background:rgba(255,39,0,.18);border-color:rgba(255,39,0,.55);text-shadow:none;}
+.hero-wrap .wcard{background:rgba(20,20,20,.65);border-color:rgba(255,255,255,.1);backdrop-filter:blur(8px);}
+.hero-wrap .tcard{background:rgba(20,20,20,.65);border-color:rgba(255,255,255,.1);backdrop-filter:blur(8px);}
+.content-page{padding-top:32px;}
+</style>
+</head>
+<body>
+<div class="hero-wrap">
+<div class="page">
+
+  <!-- ── OKR Header ── -->
+  <div class="badge">Q2 2026 · Support Team</div>
+  <h1>OKR <em>Tracker</em></h1>
+  <p class="sub">Abril – Junio 2026 · Progreso ponderado por tópico<span class="last-upd" id="last-upd"></span></p>
+  <div class="wcard">
+    <span class="wlbl">Semana del quarter</span>
+    <div class="pips" id="pips"></div>
+    <span class="winfo" id="winfo"></span>
+  </div>
+  <div class="tcard">
+    <div class="tnum" id="tnum">0%</div>
+    <div class="tright">
+      <div class="tlbl">Progreso total del quarter</div>
+      <div class="btrack"><div class="bfill" id="bfill" style="width:0%"></div></div>
+      <div class="bdates"><span>6 Abr</span><span>30 Jun</span></div>
+    </div>
+  </div>
+
+</div>
+</div>
+<div class="page content-page">
+  <div id="list"></div>
+  <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:28px;align-items:center;">
+    <button class="rbtn" style="margin-top:0" onclick="resetAll()">&#8635; Reiniciar progreso OKRs</button>
+    <button class="rbtn" id="sync-btn" style="margin-top:0;border-color:rgba(99,173,242,.3);color:var(--c2);" onclick="syncFromSheet()">&#8645; Sincronizar desde Sheet</button>
+    <button class="rbtn" style="margin-top:0;border-color:rgba(58,58,58,.6);color:var(--mut);font-size:9px;" onclick="toggleSheetConfig()">⚙ Configurar Sheet</button>
+  </div>
+  <div id="sheet-config" style="display:none;margin-top:14px;background:var(--surf);border:1px solid var(--brd);border-radius:8px;padding:16px 20px;">
+    <div style="font-family:'Aspekta',sans-serif;font-weight:700;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--mut);margin-bottom:10px;">URL del Apps Script (Google Sheet)</div>
+    <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;">
+      <input id="sheet-url-inp" type="text" placeholder="https://script.google.com/macros/s/…/exec" style="flex:1;min-width:200px;background:var(--bg);border:1px solid var(--brd);border-radius:4px;color:var(--txt);font-family:'Aspekta',sans-serif;font-size:11px;padding:8px 12px;outline:none;">
+      <button class="rbtn" style="margin-top:0;border-color:rgba(99,173,242,.4);color:var(--c2);" onclick="saveSheetUrl()">Guardar URL</button>
+    </div>
+    <div style="font-family:'Aspekta',sans-serif;font-weight:400;font-size:10px;color:rgba(119,119,119,.5);margin-top:8px;">La URL queda guardada localmente. Desplegá el Apps Script como Web App (ejecutar como: Yo, acceso: Cualquier persona).</div>
+  </div>
+
+  <!-- ── Equipo & Responsabilidades ── -->
+  <div class="sec-hdr">Responsabilidades por OKR</div>
+  <div id="resp-list"></div>
+
+  <!-- ── Timeline ── -->
+  <div class="sec-hdr">Timeline Q2 2026 · Abril – Junio</div>
+  <div class="tl-legend">
+    <div class="tl-leg-item"><div class="tl-leg-dot" style="background:rgba(255,39,0,.5);border:1px solid rgba(255,39,0,.7)"></div>Anto</div>
+    <div class="tl-leg-item"><div class="tl-leg-dot" style="background:rgba(99,173,242,.5);border:1px solid rgba(99,173,242,.7)"></div>Ale</div>
+    <div class="tl-leg-item"><div class="tl-leg-dot" style="background:rgba(243,195,93,.5);border:1px solid rgba(243,195,93,.7)"></div>Ambos</div>
+  </div>
+  <div class="tl-wrap">
+    <div class="tl-inner">
+      <!-- fila meses -->
+      <div class="tl-mrow">
+        <div></div>
+        <div class="tl-mspan abril" style="grid-column:span 4">ABRIL</div>
+        <div class="tl-mspan mayo"  style="grid-column:span 4">MAYO</div>
+        <div class="tl-mspan junio" style="grid-column:span 5">JUNIO</div>
+      </div>
+      <!-- fila semanas -->
+      <div class="tl-hrow">
+        <div class="tl-hcell">OKR</div>
+        <div class="tl-hcell">S1<span class="tl-hdate">6/4</span></div>
+        <div class="tl-hcell">S2<span class="tl-hdate">13/4</span></div>
+        <div class="tl-hcell">S3<span class="tl-hdate">20/4</span></div>
+        <div class="tl-hcell">S4<span class="tl-hdate">27/4</span></div>
+        <div class="tl-hcell" style="border-left:2px solid rgba(99,173,242,.4)">S5<span class="tl-hdate">4/5</span></div>
+        <div class="tl-hcell">S6<span class="tl-hdate">11/5</span></div>
+        <div class="tl-hcell">S7<span class="tl-hdate">18/5</span></div>
+        <div class="tl-hcell">S8<span class="tl-hdate">25/5</span></div>
+        <div class="tl-hcell" style="border-left:2px solid rgba(243,195,93,.4)">S9<span class="tl-hdate">1/6</span></div>
+        <div class="tl-hcell">S10<span class="tl-hdate">8/6</span></div>
+        <div class="tl-hcell">S11<span class="tl-hdate">15/6</span></div>
+        <div class="tl-hcell">S12<span class="tl-hdate">22/6</span></div>
+        <div class="tl-hcell">S13<span class="tl-hdate">29/6</span></div>
+      </div>
+
+      <!-- OKR 1: AI-Powered Intranet Site (Anto) · S5–S10 -->
+      <div class="tl-erow">
+        <div class="tl-elbl"><div class="tl-ecode">OKR 1</div><div class="tl-ename">AI-Powered Intranet</div></div>
+        <div class="tl-bars-area">
+          <div class="tl-wk-bg"></div><div class="tl-wk-bg"></div><div class="tl-wk-bg"></div><div class="tl-wk-bg"></div>
+          <div class="tl-wk-bg mayo"></div><div class="tl-wk-bg mayo"></div><div class="tl-wk-bg mayo"></div><div class="tl-wk-bg mayo"></div>
+          <div class="tl-wk-bg junio"></div><div class="tl-wk-bg junio"></div><div class="tl-wk-bg junio"></div><div class="tl-wk-bg junio"></div><div class="tl-wk-bg junio"></div>
+          <div class="tl-bar senior" style="left:31%;width:44%"></div>
+        </div>
+      </div>
+
+      <!-- OKR 2: Video Training HD (Ale) · S2–S4 + S7–S8 -->
+      <div class="tl-erow">
+        <div class="tl-elbl"><div class="tl-ecode">OKR 2</div><div class="tl-ename">Video Training HD</div></div>
+        <div class="tl-bars-area">
+          <div class="tl-wk-bg"></div><div class="tl-wk-bg"></div><div class="tl-wk-bg"></div><div class="tl-wk-bg"></div>
+          <div class="tl-wk-bg mayo"></div><div class="tl-wk-bg mayo"></div><div class="tl-wk-bg mayo"></div><div class="tl-wk-bg mayo"></div>
+          <div class="tl-wk-bg junio"></div><div class="tl-wk-bg junio"></div><div class="tl-wk-bg junio"></div><div class="tl-wk-bg junio"></div><div class="tl-wk-bg junio"></div>
+          <div class="tl-bar junior" style="left:8%;width:21%"></div>
+          <div class="tl-bar junior" style="left:47%;width:13%"></div>
+        </div>
+      </div>
+
+      <!-- OKR 3: Video Training CS (Anto) · S3–S6 -->
+      <div class="tl-erow">
+        <div class="tl-elbl"><div class="tl-ecode">OKR 3</div><div class="tl-ename">Video Training CS</div></div>
+        <div class="tl-bars-area">
+          <div class="tl-wk-bg"></div><div class="tl-wk-bg"></div><div class="tl-wk-bg"></div><div class="tl-wk-bg"></div>
+          <div class="tl-wk-bg mayo"></div><div class="tl-wk-bg mayo"></div><div class="tl-wk-bg mayo"></div><div class="tl-wk-bg mayo"></div>
+          <div class="tl-wk-bg junio"></div><div class="tl-wk-bg junio"></div><div class="tl-wk-bg junio"></div><div class="tl-wk-bg junio"></div><div class="tl-wk-bg junio"></div>
+          <div class="tl-bar senior" style="left:16%;width:29%"></div>
+        </div>
+      </div>
+
+      <!-- OKR 4: Strategic Alignment TC (Ale) · S3–S9 -->
+      <div class="tl-erow">
+        <div class="tl-elbl"><div class="tl-ecode">OKR 4</div><div class="tl-ename">Strategic Alignment TC</div></div>
+        <div class="tl-bars-area">
+          <div class="tl-wk-bg"></div><div class="tl-wk-bg"></div><div class="tl-wk-bg"></div><div class="tl-wk-bg"></div>
+          <div class="tl-wk-bg mayo"></div><div class="tl-wk-bg mayo"></div><div class="tl-wk-bg mayo"></div><div class="tl-wk-bg mayo"></div>
+          <div class="tl-wk-bg junio"></div><div class="tl-wk-bg junio"></div><div class="tl-wk-bg junio"></div><div class="tl-wk-bg junio"></div><div class="tl-wk-bg junio"></div>
+          <div class="tl-bar junior" style="left:16%;width:52%"></div>
+        </div>
+      </div>
+
+      <!-- Fechas clave -->
+      <div class="tl-erow tl-events">
+        <div class="tl-elbl"><div class="tl-ename" style="font-size:10px;color:var(--mut)">Fechas clave</div></div>
+        <div class="tl-bars-area">
+          <div class="tl-wk-bg"></div><div class="tl-wk-bg"></div><div class="tl-wk-bg"></div><div class="tl-wk-bg"></div>
+          <div class="tl-wk-bg mayo"></div><div class="tl-wk-bg mayo"></div><div class="tl-wk-bg mayo"></div><div class="tl-wk-bg mayo"></div>
+          <div class="tl-wk-bg junio"></div><div class="tl-wk-bg junio"></div><div class="tl-wk-bg junio"></div><div class="tl-wk-bg junio"></div><div class="tl-wk-bg junio"></div>
+          <div class="ev-chip ev-anto"  style="left:8%;top:8px">Vac. Anto</div>
+          <div class="ev-chip ev-warn"  style="left:38%;top:8px">Hot Sale</div>
+          <div class="ev-chip ev-warn"  style="left:46%;top:8px">MQR</div>
+          <div class="ev-chip ev-muted" style="left:77%;top:8px">Perf.Rev Q2</div>
+          <div class="ev-chip ev-ale"   style="left:31%;top:34px">ExtraDays Ale</div>
+          <div class="ev-chip ev-warn"  style="left:54%;top:34px">Finde largo</div>
+          <div class="ev-chip ev-muted" style="left:85%;top:34px">FQR</div>
+          <div class="ev-chip ev-muted" style="left:92%;top:34px">Offsite LATAM</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ── Supuestos y Riesgos / Highlights ── -->
+  <div class="sec-hdr">Supuestos, Riesgos &amp; Highlights Q2</div>
+  <div class="two-col">
+    <div class="two-col-side">
+      <div class="col-hdr warn">⚠ Supuestos y riesgos</div>
+      <div class="risk-list" id="risk-list-body"></div>
+      <div class="add-row edit-only-block">
+        <input class="add-inp" id="risk-add-inp" placeholder="Agregar supuesto o riesgo… (Enter para guardar)">
+      </div>
+    </div>
+    <div class="two-col-side">
+      <div class="col-hdr good">✦ Highlights esperados al cierre del Q2</div>
+      <div class="hlist" id="hlist"></div>
+      <div class="add-row edit-only-block">
+        <input class="add-inp" id="hl-add-inp" placeholder="Agregar highlight… (Enter para guardar)">
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<button class="em-fab" id="em-fab" onclick="toggleEditMode()">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+  Modo edición
+</button>
+<div id="toast" class="save-toast"></div>
+
+<script>
+/* ── OKR Data ── */
+var OKRS=[
+  {id:"o1",color:"#63ADF2",name:"Build the Support Team's AI-Powered Intranet Site",
+   topics:[
+    {w:5,  def:100,name:"Planificacion y diseno",acts:[{t:"Mapear todas las secciones que va a tener"},{t:"Definir que contenido va en cada seccion"}]},
+    {w:15, def:100,name:"Desarrollo y acceso",acts:[{t:"Subir a un repositorio"},{t:"Conectar a una URL real"},{t:"Configurar el login / acceso"},{t:"Crear usuarios para cada persona"}]},
+    {w:10, def:15, name:"Contenido",acts:[{t:"Mapear y organizar la informacion de ambos equipos"},{t:"Cargar la biblioteca de conocimiento al site"}]},
+    {w:30, def:0,  name:"Automatizaciones: Agente de calidad",acts:[{t:"Definir nombre, scope y logica del agente"},{t:"Conectar biblioteca de conocimiento como fuente"},{t:"Conectar Intercom para obtener casos aleatorios"},{t:"Desarrollar analisis de tipificacion de operadores"},{t:"Configurar generacion de reportes automaticos"},{t:"Testear MVP con casos reales"},{t:"Version pro: evaluar acciones del agente"}]},
+    {w:20, def:0,  name:"Automatizaciones: Productividad",acts:[{t:"Extraccion automatica del reporte de Intercom (lunes 10am)"},{t:"Carga automatica del reporte en la seccion del site"},{t:"Actualizacion de archivos historicos de productividad"},{t:"Notificacion automatica a operadores (Slack + site)"}]},
+    {w:10, def:0,  name:"Automatizaciones: Registro de reuniones",acts:[{t:"Conectar Gemini para toma de notas automatica en meets"},{t:"Guardado automatico del archivo con presentes en el site"}]},
+    {w:10, def:0,  name:"Lanzamiento y comunicacion",acts:[{t:"Testear con el equipo"},{t:"Lanzar y comunicar al equipo"}]}
+  ]},
+  {id:"o2",color:"#FF2700",name:"Produce Video-Based Training Materials - HD",
+   topics:[
+    {w:30,def:100,name:"Definicion de contenidos",acts:[{t:"Definir objetivos y alcance de cada video"},{t:"Identificar y priorizar temas de capacitacion"}]},
+    {w:40,def:0,  name:"Produccion de videos",acts:[{t:"Armar guiones u outlines"},{t:"Grabar y editar videos. Revisar videos existentes"}]},
+    {w:15,def:0,  name:"Publicacion y organizacion",acts:[{t:"Organizar contenidos por tematica en un unico documento"},{t:"Vincular videos con documentacion existente"}]},
+    {w:15,def:0,  name:"Comunicacion y adopcion",acts:[{t:"Comunicar y promover el uso de los videos. Capacitar al equipo"},{t:"Recoger feedback y realizar ajustes"}]}
+  ]},
+  {id:"o3",color:"#046865",name:"Produce Video-Based Training Materials - CS",
+   topics:[
+    {w:30,def:100,name:"Definicion de contenidos",acts:[{t:"Definir objetivos y alcance de cada video",r:"Anto"},{t:"Identificar y priorizar temas de capacitacion",r:"Anto"}]},
+    {w:20,def:100,name:"Formato y estandares",acts:[{t:"Definir formato, duracion y estilo de los videos",r:"Anto"},{t:"Establecer estructura base y criterios visuales",r:"Anto"}]},
+    {w:30,def:60, name:"Produccion de videos",acts:[{t:"Armar guiones u outlines",r:"Equipo"},{t:"Grabar y editar videos. Revisar videos existentes"}]},
+    {w:10,def:45, name:"Publicacion y organizacion",acts:[{t:"Organizar contenidos por tematica en un unico documento",r:"Anto"},{t:"Vincular videos con documentacion existente",r:"Anto"}]},
+    {w:10,def:12, name:"Comunicacion y adopcion",acts:[{t:"Comunicar y promover el uso de los videos",r:"Ale / Anto"},{t:"Recoger feedback y realizar ajustes",r:"Ale / Anto"}]}
+  ]},
+  {id:"o4",color:"#F3C35D",name:"Build Strategic Alignment with 15 Transportation Companies",
+   topics:[
+    {w:40,def:10,name:"Definicion y Seleccion",acts:[{t:"Identificar las 15 empresas de transporte estrategicas"},{t:"Mapear interlocutores clave y tomadores de decisiones"},{t:"Relevamiento de reclamos e identificacion de puntos criticos"},{t:"Elaborar informe de diagnostico personalizado por empresa"}]},
+    {w:35,def:0, name:"Gestion de Reuniones y Acuerdos",acts:[{t:"Establecer contacto formal y coordinar reunion"},{t:"Ejecutar reuniones de alineacion uno a uno"},{t:"Definir acuerdos de colaboracion y objetivos comunes"}]},
+    {w:25,def:0, name:"Consolidacion y Seguimiento",acts:[{t:"Establecer canales de comunicacion directa y fluida"},{t:"Documentar el estado final de alineacion con las 15 empresas"}]}
+  ]}
+];
+
+
+/* ── OKR Logic ── */
+var KEY="okr_q2_2026_v3",S={};
+function load(){try{var r=localStorage.getItem(KEY);if(r)S=JSON.parse(r);}catch(e){}}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(S));}catch(e){}}
+function gk(oi,ti){return oi+"_"+ti;}
+function getPct(oi,ti){var k=gk(oi,ti);return S[k]!==undefined?S[k]:OKRS.find(function(o){return o.id===oi;}).topics[ti].def;}
+function setPct(oi,ti,v){S[gk(oi,ti)]=v;save();}
+function okrPct(oi){var okr=OKRS.find(function(o){return o.id===oi;});return Math.round(okr.topics.reduce(function(s,t,i){return s+(getPct(oi,i)/100)*t.w;},0));}
+function totalPct(){return Math.round(OKRS.reduce(function(s,o){return s+okrPct(o.id);},0)/OKRS.length);}
+function getStatus(p){
+  var start=new Date("2026-04-06"),end=new Date("2026-06-30"),now=new Date();
+  var el=Math.max(0,Math.min(1,(now-start)/(end-start)));
+  var exp=el*100;
+  if(p>=exp-5)return"on";if(p>=exp-20)return"risk";return"off";
+}
+var SL={on:"On Track",risk:"At Risk",off:"Off Track"};
+function fillSlider(el,color){
+  var p=el.value;
+  el.style.background="linear-gradient(to right,"+color+" 0%,"+color+" "+p+"%,var(--brd) "+p+"%,var(--brd) 100%)";
+}
+function updateTotal(){
+  var p=totalPct();
+  document.getElementById("tnum").textContent=p+"%";
+  document.getElementById("bfill").style.width=p+"%";
+}
+function updateOkr(oi){
+  var p=okrPct(oi),s=getStatus(p);
+  var pe=document.getElementById("op_"+oi),be=document.getElementById("ob_"+oi),se=document.getElementById("os_"+oi);
+  if(pe)pe.textContent=p+"%";
+  if(be)be.style.width=p+"%";
+  if(se){se.textContent=SL[s];se.className="sbdg s-"+s;}
+  updateTotal();
+}
+function render(){
+  var list=document.getElementById("list");list.innerHTML="";
+  OKRS.forEach(function(okr){
+    var p=okrPct(okr.id),s=getStatus(p);
+    var card=document.createElement("div");card.className="ocard";card.id="c_"+okr.id;
+    var topicsHTML=okr.topics.map(function(t,ti){
+      var val=getPct(okr.id,ti);
+      var acts=t.acts.map(function(a,ai){
+        var ckid=okr.id+"_"+ti+"_"+ai;
+        var done=!!CK[ckid];
+        return '<div class="act'+(done?" ck-done":"")+'" id="act_'+ckid+'">'
+          +'<div class="act-ck" onclick="toggleCheck(\''+ckid+'\')">'
+          +'<svg viewBox="0 0 8 8" fill="none" stroke-width="2"><polyline points="1 4 3 6 7 2"/></svg></div>'
+          +'<span class="atxt editable-txt" contenteditable="false" data-ck="txt_'+ckid+'">'+a.t+'</span>'
+          +(a.r?'<span class="aresp">'+a.r+'</span>':'')
+          +'</div>';
+      }).join("");
+      var noteVal=NK[okr.id]||"";
+      var notesArea=ti===okr.topics.length-1
+        ?'<div class="okr-notes-area"><div class="notes-lbl">Notas del OKR</div>'
+         +'<textarea class="notes-ta" placeholder="Bloqueos, contexto, comentarios…" data-okr="'+okr.id+'" onchange="saveNote(this)">'+noteVal+'</textarea></div>'
+        :"";
+      return '<div class="topic"><div class="thead"><span class="tname">'+t.name+'</span><span class="tweight">peso '+t.w+'%</span><span class="tval" id="tv_'+okr.id+'_'+ti+'" style="color:'+okr.color+'">'+val+'%</span></div>'
+        +'<input type="range" min="0" max="100" value="'+val+'" id="sl_'+okr.id+'_'+ti+'" data-oi="'+okr.id+'" data-ti="'+ti+'" data-color="'+okr.color+'">'
+        +'<div class="slends"><span>0%</span><span>100%</span></div>'
+        +'<div>'+acts+'</div>'+notesArea+'</div>';
+    }).join("");
+    card.innerHTML='<div class="ohead" onclick="toggle(\''+okr.id+'\')">'
+      +'<div class="odot" style="background:'+okr.color+'"></div>'
+      +'<div class="ohb"><div class="otitle">'+okr.name+'</div>'
+      +'<div class="ometa"><span class="opct" id="op_'+okr.id+'" style="color:'+okr.color+'">'+p+'%</span>'
+      +'<span class="ntop">'+okr.topics.length+' topicos</span>'
+      +'<span class="sbdg s-'+s+'" id="os_'+okr.id+'">'+SL[s]+'</span></div></div>'
+      +'<svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div>'
+      +'<div class="obarrow"><div class="otrack"><div class="ofill" id="ob_'+okr.id+'" style="width:'+p+'%;background:'+okr.color+'"></div></div></div>'
+      +'<div class="topics" id="tp_'+okr.id+'">'+topicsHTML+'</div>';
+    list.appendChild(card);
+    okr.topics.forEach(function(_,ti){
+      var sl=document.getElementById("sl_"+okr.id+"_"+ti);
+      if(!sl)return;
+      fillSlider(sl,okr.color);
+      sl.addEventListener("input",function(){
+        var v=parseInt(sl.value);
+        setPct(okr.id,ti,v);
+        document.getElementById("tv_"+okr.id+"_"+ti).textContent=v+"%";
+        fillSlider(sl,okr.color);
+        updateOkr(okr.id);
+        markUpdate();
+      });
+    });
+  });
+  updateTotal();
+  renderWeeks();
+}
+function toggle(oi){document.getElementById("c_"+oi).classList.toggle("open");}
+function resetAll(){
+  if(!confirm("Reiniciar todo el progreso de OKRs?"))return;
+  S={};save();render();
+}
+function renderWeeks(){
+  var start=new Date("2026-04-06"),end=new Date("2026-06-30"),now=new Date();
+  var TOTAL=13,elapsed=Math.max(0,(now-start)/(1000*60*60*24*7));
+  var cur=Math.min(Math.floor(elapsed)+1,TOTAL);
+  var pips=document.getElementById("pips");pips.innerHTML="";
+  for(var i=1;i<=TOTAL;i++){
+    var d=document.createElement("div");
+    d.className="pip"+(i<cur?" past":i===cur?" cur":"");
+    pips.appendChild(d);
+  }
+  var rem=Math.max(0,TOTAL-cur);
+  document.getElementById("winfo").textContent="Semana "+cur+" de "+TOTAL+" \u00b7 "+rem+" sem. restantes";
+}
+
+
+/* ── Responsabilidades ── */
+var RKEY="resp_q2_2026_v1",RA={};
+var OKR_OWNERS={o1:{label:"Owner: Anto",cls:"o-anto"},o2:{label:"Owner: Ale",cls:"o-ale"},o3:{label:"Owner: Anto",cls:"o-anto"},o4:{label:"Owner: Ale",cls:"o-ale"}};
+function rload(){try{var r=localStorage.getItem(RKEY);if(r)RA=JSON.parse(r);}catch(e){}}
+function rsave(){try{localStorage.setItem(RKEY,JSON.stringify(RA));}catch(e){}}
+function rk(oi,ti,ai){return oi+"_"+ti+"_"+ai;}
+function getResp(oi,ti,ai){var k=rk(oi,ti,ai);return RA[k]||"";}
+function setResp(oi,ti,ai,val){RA[rk(oi,ti,ai)]=val;rsave();}
+
+function renderResp(){
+  var el=document.getElementById("resp-list");if(!el)return;el.innerHTML="";
+  OKRS.forEach(function(okr){
+    var ow=OKR_OWNERS[okr.id];
+    var card=document.createElement("div");card.className="rsp-card";card.id="rc_"+okr.id;
+    var topicsHTML="";
+    okr.topics.forEach(function(t,ti){
+      var tid="rt_"+okr.id+"_"+ti;
+      var rows="";
+      t.acts.forEach(function(a,ai){
+        var val=getResp(okr.id,ti,ai);
+        rows+='<div class="rsp-row">'
+          +'<div class="rsp-task">'+a.t+'</div>'
+          +'<input class="rsp-inp" type="text" placeholder="Asignar responsable" value="'+val+'"'
+          +' data-oi="'+okr.id+'" data-ti="'+ti+'" data-ai="'+ai+'">'
+          +'</div>';
+      });
+      topicsHTML+='<div class="rsp-topic" id="'+tid+'">'
+        +'<div class="rsp-topic-hdr" onclick="document.getElementById(\''+tid+'\').classList.toggle(\'open\')">'
+        +t.name
+        +'<svg class="rsp-topic-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>'
+        +'</div>'
+        +'<div class="rsp-topic-rows">'+rows+'</div>'
+        +'</div>';
+    });
+    card.innerHTML='<div class="rsp-head" onclick="rtoggle(\''+okr.id+'\')">'
+      +'<div class="rsp-dot" style="background:'+okr.color+'"></div>'
+      +'<div class="rsp-title">'+okr.name+'</div>'
+      +'<span class="rsp-owner '+ow.cls+'">'+ow.label+'</span>'
+      +'<svg class="rsp-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>'
+      +'</div>'
+      +'<div class="rsp-body">'+topicsHTML+'</div>';
+    el.appendChild(card);
+  });
+  el.querySelectorAll(".rsp-inp").forEach(function(inp){
+    inp.addEventListener("change",function(){
+      setResp(inp.dataset.oi,parseInt(inp.dataset.ti),parseInt(inp.dataset.ai),inp.value.trim());
+    });
+  });
+}
+function rtoggle(oi){document.getElementById("rc_"+oi).classList.toggle("open");}
+
+/* ── Checks ── */
+var CKKEY="okr_checks_v1",CK={};
+function ckload(){try{var r=localStorage.getItem(CKKEY);if(r)CK=JSON.parse(r);}catch(e){}}
+function cksave(){try{localStorage.setItem(CKKEY,JSON.stringify(CK));}catch(e){}}
+function toggleCheck(id){
+  CK[id]=!CK[id];cksave();
+  var el=document.getElementById("act_"+id);
+  if(el)el.classList.toggle("ck-done",!!CK[id]);
+  markUpdate();
+}
+
+/* ── Notes ── */
+var NKEY="okr_notes_v1",NK={};
+function nload(){try{var r=localStorage.getItem(NKEY);if(r)NK=JSON.parse(r);}catch(e){}}
+function nsave(){try{localStorage.setItem(NKEY,JSON.stringify(NK));}catch(e){}}
+function saveNote(ta){NK[ta.dataset.okr]=ta.value;nsave();markUpdate();}
+
+/* ── Risks ── */
+var RKKEY="risks_v1",RISKS=null;
+var DEFAULT_RISKS=[
+  "El mapeo de contenido requiere participación activa de ambos equipos desde la semana 1.",
+  "La disponibilidad de herramientas IA (Gemini, Claude) puede variar — contemplar plan B.",
+  "Los temas de video pueden ajustarse según feedback del equipo operativo durante el quarter.",
+  "Las 15 empresas de transporte pueden no tener disponibilidad para reunirse en Q2.",
+  "La adopción del intranet depende del onboarding y la comunicación del lanzamiento.",
+  "La producción de videos requiere bloques de tiempo dedicado — priorizar por impacto.",
+  "El Strategic Alignment puede extenderse si las reuniones con empresas se reprograman."
+];
+function rkload(){try{var r=localStorage.getItem(RKKEY);if(r)RISKS=JSON.parse(r);}catch(e){}}
+function rksave(){try{localStorage.setItem(RKKEY,JSON.stringify(RISKS));}catch(e){}}
+function getRisks(){return RISKS||DEFAULT_RISKS;}
+function renderRisks(){
+  var el=document.getElementById("risk-list-body");if(!el)return;
+  el.innerHTML="";
+  getRisks().forEach(function(r,i){
+    var row=document.createElement("div");row.className="ritem";
+    row.innerHTML='<span class="ritem-icon">⚠</span>'
+      +'<span class="editable-txt" contenteditable="false" data-rk="'+i+'" onblur="saveRiskText(this,'+i+')">'+r+'</span>'
+      +'<button class="item-rm edit-only" onclick="removeRisk('+i+')">×</button>';
+    el.appendChild(row);
+  });
+  var inp=document.getElementById("risk-add-inp");
+  if(inp){inp.onkeydown=function(e){if(e.key==="Enter"&&inp.value.trim()){addRisk(inp.value.trim());inp.value="";}};}
+}
+function saveRiskText(el,i){
+  if(!RISKS)RISKS=DEFAULT_RISKS.slice();
+  RISKS[i]=el.textContent.trim();rksave();markUpdate();
+}
+function removeRisk(i){
+  if(!RISKS)RISKS=DEFAULT_RISKS.slice();
+  RISKS.splice(i,1);rksave();renderRisks();markUpdate();
+}
+function addRisk(txt){
+  if(!RISKS)RISKS=DEFAULT_RISKS.slice();
+  RISKS.push(txt);rksave();renderRisks();markUpdate();
+}
+
+/* ── Highlights ── */
+var HIGHLIGHTS=[
+  {id:"h1",t:"Intranet del equipo live, accesible y en uso activo"},
+  {id:"h2",t:"Automatización de reportes funcionando (lunes 10am sin intervención)"},
+  {id:"h3",t:"Agente de calidad evaluando conversaciones reales del equipo"},
+  {id:"h4",t:"Biblioteca de videos CS publicada y comunicada al equipo"},
+  {id:"h5",t:"Biblioteca de videos HD publicada y comunicada al equipo"},
+  {id:"h6",t:"Al menos 12 de 15 empresas de transporte alineadas con acuerdo formal"},
+  {id:"h7",t:"El equipo usa el intranet como fuente principal de conocimiento"}
+];
+var HKEY="highlights_q2_v1",HD={};
+var HLKEY="highlights_custom_v1",HL=null;
+function hload(){try{var r=localStorage.getItem(HKEY);if(r)HD=JSON.parse(r);}catch(e){}}
+function hlload(){try{var r=localStorage.getItem(HLKEY);if(r)HL=JSON.parse(r);}catch(e){}}
+function hsave(){try{localStorage.setItem(HKEY,JSON.stringify(HD));}catch(e){}}
+function hlsave(){try{localStorage.setItem(HLKEY,JSON.stringify(HL));}catch(e){}}
+function getHL(){return HL||HIGHLIGHTS.map(function(h){return{id:h.id,t:h.t};});}
+function renderHighlights(){
+  var el=document.getElementById("hlist");if(!el)return;el.innerHTML="";
+  getHL().forEach(function(h,i){
+    var done=!!HD[h.id];
+    var item=document.createElement("div");item.className="hitem"+(done?" done":"");item.id="hi_"+h.id;
+    item.innerHTML='<div class="hcheck" onclick="toggleHL(\''+h.id+'\')">'
+      +'<svg viewBox="0 0 12 12" fill="none" stroke-width="2.5"><polyline points="2 6 5 9 10 3"/></svg></div>'
+      +'<span class="htxt editable-txt" contenteditable="false" onblur="saveHLText(this,'+i+')">'+h.t+'</span>'
+      +'<button class="item-rm edit-only" onclick="removeHL('+i+')">×</button>';
+    el.appendChild(item);
+  });
+  var inp=document.getElementById("hl-add-inp");
+  if(inp){inp.onkeydown=function(e){if(e.key==="Enter"&&inp.value.trim()){addHL(inp.value.trim());inp.value="";}};}
+}
+function toggleHL(id){HD[id]=!HD[id];hsave();var el=document.getElementById("hi_"+id);if(el)el.classList.toggle("done",!!HD[id]);markUpdate();}
+function saveHLText(el,i){var list=getHL();if(!HL)HL=list.slice();HL[i].t=el.textContent.trim();hlsave();markUpdate();}
+function removeHL(i){if(!HL)HL=getHL().slice();HL.splice(i,1);hlsave();renderHighlights();markUpdate();}
+function addHL(txt){if(!HL)HL=getHL().slice();HL.push({id:"h"+Date.now(),t:txt});hlsave();renderHighlights();markUpdate();}
+
+/* ── Last update ── */
+var LUKEY="last_upd_v1";
+function markUpdate(){
+  var now=new Date();
+  var str="· Actualizado "+now.toLocaleDateString("es-AR",{day:"numeric",month:"short"})+" "+now.toLocaleTimeString("es-AR",{hour:"2-digit",minute:"2-digit"});
+  localStorage.setItem(LUKEY,str);
+  var el=document.getElementById("last-upd");if(el)el.textContent=str;
+}
+function loadLastUpd(){var v=localStorage.getItem(LUKEY);if(v){var el=document.getElementById("last-upd");if(el)el.textContent=v;}}
+
+/* ── Edit mode ── */
+var EDIT_MODE=false;
+function toggleEditMode(){
+  EDIT_MODE=!EDIT_MODE;
+  document.body.classList.toggle("edit-mode",EDIT_MODE);
+  var fab=document.getElementById("em-fab");
+  if(EDIT_MODE){
+    fab.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Salir de edición';
+    fab.classList.add("active");
+    document.querySelectorAll(".editable-txt").forEach(function(el){el.contentEditable="true";});
+    showToast("Modo edición activo — hacé clic en cualquier texto para editarlo");
+  } else {
+    fab.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg> Modo edición';
+    fab.classList.remove("active");
+    document.querySelectorAll(".editable-txt").forEach(function(el){el.contentEditable="false";});
+    showToast("Cambios guardados ✓");
+  }
+}
+function showToast(msg){
+  var t=document.getElementById("toast");t.textContent=msg;t.classList.add("show");
+  setTimeout(function(){t.classList.remove("show");},2500);
+}
+
+/* ── Google Sheet Sync ── */
+var SURLKEY="sheet_url_v1";
+var DEFAULT_SHEET_URL="PEGAR_URL_APPS_SCRIPT_AQUI";
+function getSheetUrl(){return localStorage.getItem(SURLKEY)||DEFAULT_SHEET_URL;}
+function saveSheetUrl(){
+  var inp=document.getElementById("sheet-url-inp");
+  if(!inp)return;
+  var url=inp.value.trim();
+  if(!url){showToast("Pegá la URL del Apps Script primero");return;}
+  localStorage.setItem(SURLKEY,url);
+  showToast("URL guardada ✓");
+  toggleSheetConfig();
+}
+function toggleSheetConfig(){
+  var c=document.getElementById("sheet-config");
+  if(!c)return;
+  var visible=c.style.display==="none";
+  c.style.display=visible?"block":"none";
+  if(visible){
+    var inp=document.getElementById("sheet-url-inp");
+    if(inp)inp.value=getSheetUrl();
+  }
+}
+function syncFromSheet(silent){
+  var url=getSheetUrl();
+  if(!url){if(!silent)showToast("Configurá la URL del Sheet primero (⚙ Configurar Sheet)");return;}
+  var btn=document.getElementById("sync-btn");
+  if(btn&&!silent){btn.textContent="Sincronizando…";btn.disabled=true;}
+  fetch(url)
+    .then(function(r){return r.json();})
+    .then(function(data){
+      var changed=0;
+      OKRS.forEach(function(okr){
+        var d=data[okr.id];
+        if(!d||!d.topics)return;
+        d.topics.forEach(function(val,ti){
+          if(ti<okr.topics.length){
+            setPct(okr.id,ti,Math.round(val));
+            changed++;
+          }
+        });
+      });
+      save();render();markUpdate();
+      if(!silent)showToast("Sincronizado desde Sheet ✓ ("+changed+" tópicos actualizados)");
+    })
+    .catch(function(){
+      if(!silent)showToast("Error al conectar con el Sheet — revisá la URL");
+    })
+    .finally(function(){
+      if(btn&&!silent){btn.textContent="&#8645; Sincronizar desde Sheet";btn.disabled=false;}
+    });
+}
+setInterval(function(){syncFromSheet(true);},5*60*1000);
+
+ckload();nload();rkload();hload();hlload();rload();
+load();render();renderResp();renderRisks();renderHighlights();loadLastUpd();
+syncFromSheet(true);
+</script>
+</body>
+</html>
