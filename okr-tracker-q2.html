@@ -741,7 +741,7 @@ function syncFromSheet(silent){
         if(!d||!d.topics)return;
         d.topics.forEach(function(val,ti){
           if(ti<okr.topics.length){
-            setPct(okr.id,ti,Math.round(val));
+            setPct(okr.id,ti,val);
             changed++;
           }
         });
