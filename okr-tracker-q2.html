@@ -421,13 +421,15 @@ var OKRS=[
 
 
 /* ── OKR Logic ── */
-var KEY="okr_q2_2026_v3",S={};
+var KEY="okr_q2_2026_v3",S={},GKEY="okr_global_v1",GS={};
 function load(){try{var r=localStorage.getItem(KEY);if(r)S=JSON.parse(r);}catch(e){}}
 function save(){try{localStorage.setItem(KEY,JSON.stringify(S));}catch(e){}}
+function gload(){try{var r=localStorage.getItem(GKEY);if(r)GS=JSON.parse(r);}catch(e){}}
+function gsave(){try{localStorage.setItem(GKEY,JSON.stringify(GS));}catch(e){}}
 function gk(oi,ti){return oi+"_"+ti;}
 function getPct(oi,ti){var k=gk(oi,ti);return S[k]!==undefined?S[k]:OKRS.find(function(o){return o.id===oi;}).topics[ti].def;}
 function setPct(oi,ti,v){S[gk(oi,ti)]=v;save();}
-function okrPct(oi){var okr=OKRS.find(function(o){return o.id===oi;});return Math.round(okr.topics.reduce(function(s,t,i){return s+(getPct(oi,i)/100)*t.w;},0));}
+function okrPct(oi){if(GS[oi]!==undefined)return Math.round(GS[oi]);var okr=OKRS.find(function(o){return o.id===oi;});return Math.round(okr.topics.reduce(function(s,t,i){return s+(getPct(oi,i)/100)*t.w;},0));}
 function totalPct(){return Math.round(OKRS.reduce(function(s,o){return s+okrPct(o.id);},0)/OKRS.length);}
 function getStatus(p){
   var start=new Date("2026-04-06"),end=new Date("2026-06-30"),now=new Date();
@@ -739,6 +741,7 @@ function syncFromSheet(silent){
       OKRS.forEach(function(okr){
         var d=data[okr.id];
         if(!d||!d.topics)return;
+        if(d.globalPct!==undefined){GS[okr.id]=d.globalPct;gsave();}
         d.topics.forEach(function(val,ti){
           if(ti<okr.topics.length){
             setPct(okr.id,ti,val);
@@ -759,7 +762,7 @@ function syncFromSheet(silent){
 setInterval(function(){syncFromSheet(true);},30*1000);
 
 ckload();nload();rkload();hload();hlload();rload();
-load();render();renderResp();renderRisks();renderHighlights();loadLastUpd();
+load();gload();render();renderResp();renderRisks();renderHighlights();loadLastUpd();
 syncFromSheet(true);
 </script>
 </body>
