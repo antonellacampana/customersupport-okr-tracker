@@ -456,6 +456,7 @@ function updateOkr(oi){
   updateTotal();
 }
 function render(){
+  var open=OKRS.map(function(o){return document.getElementById("c_"+o.id)&&document.getElementById("c_"+o.id).classList.contains("open");});
   var list=document.getElementById("list");list.innerHTML="";
   OKRS.forEach(function(okr){
     var p=okrPct(okr.id),s=getStatus(p);
@@ -476,6 +477,7 @@ function render(){
       +'<svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div>'
       +'<div class="obarrow"><div class="otrack"><div class="ofill" id="ob_'+okr.id+'" style="width:'+p+'%;background:'+okr.color+'"></div></div></div>'
       +'<div class="topics" id="tp_'+okr.id+'">'+topicsHTML+'</div>';
+    if(open[OKRS.indexOf(okr)])card.classList.add("open");
     list.appendChild(card);
   });
   updateTotal();
