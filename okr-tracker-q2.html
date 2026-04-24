@@ -460,51 +460,13 @@ function render(){
   OKRS.forEach(function(okr){
     var p=okrPct(okr.id),s=getStatus(p);
     var card=document.createElement("div");card.className="ocard";card.id="c_"+okr.id;
-    var topicsHTML=okr.topics.map(function(t,ti){
-      var val=getPct(okr.id,ti);
-      var acts=t.acts.map(function(a,ai){
-        var ckid=okr.id+"_"+ti+"_"+ai;
-        var done=!!CK[ckid];
-        return '<div class="act'+(done?" ck-done":"")+'" id="act_'+ckid+'">'
-          +'<div class="act-ck" onclick="toggleCheck(\''+ckid+'\')">'
-          +'<svg viewBox="0 0 8 8" fill="none" stroke-width="2"><polyline points="1 4 3 6 7 2"/></svg></div>'
-          +'<span class="atxt editable-txt" contenteditable="false" data-ck="txt_'+ckid+'">'+a.t+'</span>'
-          +(a.r?'<span class="aresp">'+a.r+'</span>':'')
-          +'</div>';
-      }).join("");
-      var noteVal=NK[okr.id]||"";
-      var notesArea=ti===okr.topics.length-1
-        ?'<div class="okr-notes-area"><div class="notes-lbl">Notas del OKR</div>'
-         +'<textarea class="notes-ta" placeholder="Bloqueos, contexto, comentarios…" data-okr="'+okr.id+'" onchange="saveNote(this)">'+noteVal+'</textarea></div>'
-        :"";
-      return '<div class="topic"><div class="thead"><span class="tname">'+t.name+'</span><span class="tweight">peso '+t.w+'%</span><span class="tval" id="tv_'+okr.id+'_'+ti+'" style="color:'+okr.color+'">'+val+'%</span></div>'
-        +'<input type="range" min="0" max="100" value="'+val+'" id="sl_'+okr.id+'_'+ti+'" data-oi="'+okr.id+'" data-ti="'+ti+'" data-color="'+okr.color+'">'
-        +'<div class="slends"><span>0%</span><span>100%</span></div>'
-        +'<div>'+acts+'</div>'+notesArea+'</div>';
-    }).join("");
-    card.innerHTML='<div class="ohead" onclick="toggle(\''+okr.id+'\')">'
+    card.innerHTML='<div class="ohead" style="cursor:default">'
       +'<div class="odot" style="background:'+okr.color+'"></div>'
       +'<div class="ohb"><div class="otitle">'+okr.name+'</div>'
       +'<div class="ometa"><span class="opct" id="op_'+okr.id+'" style="color:'+okr.color+'">'+p+'%</span>'
-      +'<span class="ntop">'+okr.topics.length+' topicos</span>'
-      +'<span class="sbdg s-'+s+'" id="os_'+okr.id+'">'+SL[s]+'</span></div></div>'
-      +'<svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div>'
-      +'<div class="obarrow"><div class="otrack"><div class="ofill" id="ob_'+okr.id+'" style="width:'+p+'%;background:'+okr.color+'"></div></div></div>'
-      +'<div class="topics" id="tp_'+okr.id+'">'+topicsHTML+'</div>';
+      +'<span class="sbdg s-'+s+'" id="os_'+okr.id+'">'+SL[s]+'</span></div></div></div>'
+      +'<div class="obarrow"><div class="otrack"><div class="ofill" id="ob_'+okr.id+'" style="width:'+p+'%;background:'+okr.color+'"></div></div></div>';
     list.appendChild(card);
-    okr.topics.forEach(function(_,ti){
-      var sl=document.getElementById("sl_"+okr.id+"_"+ti);
-      if(!sl)return;
-      fillSlider(sl,okr.color);
-      sl.addEventListener("input",function(){
-        var v=parseInt(sl.value);
-        setPct(okr.id,ti,v);
-        document.getElementById("tv_"+okr.id+"_"+ti).textContent=v+"%";
-        fillSlider(sl,okr.color);
-        updateOkr(okr.id);
-        markUpdate();
-      });
-    });
   });
   updateTotal();
   renderWeeks();
