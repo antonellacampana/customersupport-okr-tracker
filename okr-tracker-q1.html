@@ -735,17 +735,14 @@ function syncFromSheet(silent){
       var changed=0;
       OKRS.forEach(function(okr){
         var d=data[okr.id];
-        if(!d||!d.topics)return;
-        if(d.globalPct!==undefined){GS[okr.id]=d.globalPct;gsave();}
-        d.topics.forEach(function(val,ti){
-          if(ti<okr.topics.length){
-            setPct(okr.id,ti,val);
-            changed++;
-          }
-        });
+        if(!d)return;
+        if(d.globalPct!==undefined){GS[okr.id]=d.globalPct;gsave();changed++;}
+        if(d.topics){d.topics.forEach(function(val,ti){
+          if(ti<okr.topics.length){setPct(okr.id,ti,val);changed++;}
+        });}
       });
       save();render();markUpdate();
-      if(!silent)showToast("Sincronizado desde Sheet ✓ ("+changed+" tópicos actualizados)");
+      if(!silent)showToast("Sincronizado desde Sheet ✓ ("+changed+" OKRs actualizados)");
     })
     .catch(function(){
       if(!silent)showToast("Error al conectar con el Sheet — revisá la URL");
