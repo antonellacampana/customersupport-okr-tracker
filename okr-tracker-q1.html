@@ -514,15 +514,15 @@ function resetAll(){
 function renderWeeks(){
   var start=new Date("2026-01-05"),end=new Date("2026-03-31"),now=new Date();
   var TOTAL=13,elapsed=Math.max(0,(now-start)/(1000*60*60*24*7));
-  var cur=Math.min(Math.floor(elapsed)+1,TOTAL);
+  var done=now>end;
+  var cur=done?TOTAL:Math.min(Math.floor(elapsed)+1,TOTAL);
   var pips=document.getElementById("pips");pips.innerHTML="";
   for(var i=1;i<=TOTAL;i++){
     var d=document.createElement("div");
-    d.className="pip"+(i<cur?" past":i===cur?" cur":"");
+    d.className="pip"+(done||i<cur?" past":i===cur?" cur":"");
     pips.appendChild(d);
   }
-  var rem=Math.max(0,TOTAL-cur);
-  document.getElementById("winfo").textContent="Semana "+cur+" de "+TOTAL+" · "+rem+" sem. restantes";
+  document.getElementById("winfo").textContent=done?"Q1 finalizado · 5 Ene – 31 Mar 2026":"Semana "+cur+" de "+TOTAL+" · "+Math.max(0,TOTAL-cur)+" sem. restantes";
 }
 
 
