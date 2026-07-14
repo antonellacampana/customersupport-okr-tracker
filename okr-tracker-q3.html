@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OKR Tracker Q3 2026</title>
+<style>
+@font-face{font-family:'Outfit';font-style:normal;font-weight:100 900;font-display:swap;src:url('fonts/Outfit-VariableFont_wght.ttf') format('truetype');}
+@font-face{font-family:'Aspekta';font-style:normal;font-weight:300;font-display:swap;src:url('fonts/Aspekta-300.woff2') format('woff2');}
+@font-face{font-family:'Aspekta';font-style:normal;font-weight:400;font-display:swap;src:url('fonts/Aspekta-400.woff2') format('woff2');}
+@font-face{font-family:'Aspekta';font-style:normal;font-weight:500;font-display:swap;src:url('fonts/Aspekta-500.woff2') format('woff2');}
+@font-face{font-family:'Aspekta';font-style:normal;font-weight:600;font-display:swap;src:url('fonts/Aspekta-600.woff2') format('woff2');}
+@font-face{font-family:'Aspekta';font-style:normal;font-weight:700;font-display:swap;src:url('fonts/Aspekta-700.woff2') format('woff2');}
+@font-face{font-family:'Aspekta';font-style:normal;font-weight:800;font-display:swap;src:url('fonts/Aspekta-800.woff2') format('woff2');}
+:root{--bg:#1F1F1F;--surf:#2a2a2a;--brd:#3a3a3a;--txt:#F7F7F7;--mut:#777777;--c1:#FF2700;--c2:#63ADF2;--c3:#046865;--c4:#F3C35D;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--bg);color:var(--txt);font-family:'Outfit',sans-serif;min-height:100vh;}
+.page{max-width:1200px;margin:0 auto;padding:48px 32px 100px;}
+
+/* ── OKR base ── */
+.badge{font-family:'Aspekta',sans-serif;font-weight:500;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--c1);background:rgba(255,39,0,.1);border:1px solid rgba(255,39,0,.25);display:inline-block;padding:3px 10px;border-radius:2px;margin-bottom:14px;}
+h1{font-size:clamp(24px,5vw,44px);font-weight:800;letter-spacing:-.03em;line-height:1.05;margin-bottom:6px;}
+h1 em{font-style:normal;color:var(--c1);}
+.sub{font-family:'Aspekta',sans-serif;font-weight:400;font-size:12px;color:var(--mut);margin-bottom:36px;}
+.wcard{background:var(--surf);border:1px solid var(--brd);border-radius:10px;padding:15px 22px;margin-bottom:22px;display:flex;align-items:center;gap:14px;flex-wrap:wrap;}
+.wlbl{font-family:'Aspekta',sans-serif;font-weight:500;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--mut);white-space:nowrap;}
+.pips{display:flex;gap:3px;flex:1;min-width:140px;}
+.pip{flex:1;height:5px;border-radius:1px;background:var(--brd);}
+.pip.past{background:rgba(255,39,0,.4);}
+.pip.cur{background:var(--c1);}
+.winfo{font-family:'Aspekta',sans-serif;font-weight:400;font-size:11px;color:var(--txt);white-space:nowrap;}
+.tcard{background:var(--surf);border:1px solid var(--brd);border-radius:10px;padding:22px 26px;margin-bottom:32px;display:flex;align-items:center;gap:22px;flex-wrap:wrap;}
+.tnum{font-size:48px;font-weight:800;letter-spacing:-.04em;color:var(--c1);line-height:1;}
+.tright{flex:1;min-width:160px;}
+.tlbl{font-family:'Aspekta',sans-serif;font-weight:500;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--mut);margin-bottom:8px;}
+.btrack{height:6px;background:var(--brd);border-radius:3px;overflow:hidden;margin-bottom:6px;}
+.bfill{height:100%;border-radius:3px;background:linear-gradient(90deg,var(--c1),var(--c2));transition:width .5s;}
+.bdates{display:flex;justify-content:space-between;font-family:'Aspekta',sans-serif;font-weight:400;font-size:10px;color:var(--mut);}
+.ocard{background:var(--surf);border:1px solid var(--brd);border-radius:10px;margin-bottom:16px;overflow:hidden;transition:border-color .2s;}
+.ocard:hover{border-color:rgba(255,39,0,.35);}
+.ohead{padding:18px 20px 10px;cursor:pointer;display:flex;align-items:flex-start;gap:13px;user-select:none;}
+.odot{width:9px;height:9px;border-radius:50%;flex-shrink:0;margin-top:5px;}
+.ohb{flex:1;}
+.otitle{font-size:14px;font-weight:700;line-height:1.3;margin-bottom:5px;}
+.ometa{display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
+.opct{font-family:'Aspekta',sans-serif;font-weight:700;font-size:20px;line-height:1;}
+.ntop{font-family:'Aspekta',sans-serif;font-weight:400;font-size:10px;color:var(--mut);}
+.sbdg{font-family:'Aspekta',sans-serif;font-weight:600;font-size:9px;letter-spacing:.14em;text-transform:uppercase;padding:2px 7px;border-radius:2px;border:1px solid;}
+.s-on{color:#046865;border-color:rgba(4,104,101,.4);background:rgba(4,104,101,.1);}
+.s-risk{color:#F3C35D;border-color:rgba(243,195,93,.3);background:rgba(243,195,93,.07);}
+.s-off{color:#FF2700;border-color:rgba(255,39,0,.3);background:rgba(255,39,0,.07);}
+.obarrow{padding:0 20px 12px;}
+.otrack{height:3px;background:var(--brd);border-radius:2px;overflow:hidden;}
+.ofill{height:100%;border-radius:2px;transition:width .5s;}
+.chev{width:17px;height:17px;color:var(--mut);transition:transform .22s;flex-shrink:0;margin-top:3px;}
+.ocard.open .chev{transform:rotate(180deg);}
+.topics{display:none;border-top:1px solid var(--brd);}
+.ocard.open .topics{display:block;}
+.topic{padding:15px 20px;border-bottom:1px solid rgba(58,58,58,.6);}
+.topic:last-child{border-bottom:none;}
+.thead{display:flex;align-items:baseline;gap:8px;margin-bottom:10px;flex-wrap:wrap;}
+.tname{font-size:13px;font-weight:600;flex:1;min-width:80px;}
+.tweight{font-family:'Aspekta',sans-serif;font-weight:400;font-size:10px;color:var(--mut);white-space:nowrap;}
+.tval{font-family:'Aspekta',sans-serif;font-weight:700;font-size:14px;white-space:nowrap;min-width:36px;text-align:right;transition:color .2s;}
+.rbtn{font-family:'Aspekta',sans-serif;font-weight:500;font-size:10px;letter-spacing:.12em;text-transform:uppercase;background:none;border:1px solid var(--brd);color:var(--mut);padding:8px 16px;border-radius:4px;cursor:pointer;transition:all .2s;margin-top:28px;display:block;}
+.rbtn:hover{border-color:var(--c2);color:var(--c2);}
+
+/* ── Section divider ── */
+.sec-hdr{font-family:'Aspekta',sans-serif;font-weight:700;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--mut);border-top:1px solid var(--brd);padding-top:44px;margin:52px 0 24px;}
+
+/* ── Responsabilidades por OKR ── */
+.rsp-card{background:var(--surf);border:1px solid var(--brd);border-radius:10px;margin-bottom:12px;overflow:hidden;}
+.rsp-head{padding:14px 20px;display:flex;align-items:center;gap:12px;cursor:pointer;user-select:none;}
+.rsp-head:hover{background:rgba(255,255,255,.02);}
+.rsp-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
+.rsp-title{font-size:13px;font-weight:700;flex:1;line-height:1.3;}
+.rsp-owner{font-family:'Aspekta',sans-serif;font-weight:700;font-size:9px;letter-spacing:.12em;text-transform:uppercase;padding:3px 9px;border-radius:3px;border:1px solid;white-space:nowrap;}
+.rsp-owner.o-anto{color:var(--c1);border-color:rgba(255,39,0,.4);background:rgba(255,39,0,.08);}
+.rsp-owner.o-ale{color:var(--c2);border-color:rgba(99,173,242,.4);background:rgba(99,173,242,.08);}
+.rsp-owner.o-all{color:#046865;border-color:rgba(4,104,101,.4);background:rgba(4,104,101,.08);}
+.rsp-chev{width:15px;height:15px;color:var(--mut);transition:transform .2s;flex-shrink:0;}
+.rsp-card.open .rsp-chev{transform:rotate(180deg);}
+.rsp-body{display:none;border-top:1px solid var(--brd);}
+.rsp-card.open .rsp-body{display:block;}
+.rsp-topic{border-top:1px solid rgba(58,58,58,.5);}
+.rsp-topic-hdr{padding:9px 20px;display:flex;align-items:center;gap:8px;cursor:pointer;user-select:none;font-family:'Aspekta',sans-serif;font-weight:700;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--mut);background:rgba(255,255,255,.02);}
+.rsp-topic-hdr:hover{background:rgba(255,255,255,.035);}
+.rsp-topic-chev{width:12px;height:12px;color:var(--mut);transition:transform .18s;margin-left:auto;flex-shrink:0;}
+.rsp-topic.open .rsp-topic-chev{transform:rotate(180deg);}
+.rsp-topic-rows{display:none;}
+.rsp-topic.open .rsp-topic-rows{display:block;}
+.rsp-row{display:flex;align-items:center;gap:10px;padding:8px 20px 8px 28px;border-top:1px solid rgba(58,58,58,.3);}
+.rsp-task{font-family:'Aspekta',sans-serif;font-weight:400;font-size:12px;color:var(--txt);flex:1;line-height:1.4;}
+.rsp-inp{background:var(--bg);border:1px solid var(--brd);border-radius:4px;color:var(--txt);font-family:'Aspekta',sans-serif;font-size:10px;font-weight:500;padding:4px 9px;width:120px;outline:none;transition:border-color .15s;flex-shrink:0;}
+.rsp-inp:focus{border-color:rgba(255,39,0,.4);}
+.rsp-inp::placeholder{color:var(--mut);font-weight:400;}
+
+/* ── Risks ── */
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:0;background:var(--surf);border:1px solid var(--brd);border-radius:10px;overflow:hidden;}
+@media(max-width:700px){.two-col{grid-template-columns:1fr;}}
+.two-col-side{padding:24px;}
+.two-col-side+.two-col-side{border-left:1px solid var(--brd);}
+@media(max-width:700px){.two-col-side+.two-col-side{border-left:none;border-top:1px solid var(--brd);}}
+.col-hdr{font-family:'Aspekta',sans-serif;font-weight:700;font-size:10px;letter-spacing:.14em;text-transform:uppercase;margin-bottom:18px;display:flex;align-items:center;gap:7px;}
+.col-hdr.warn{color:var(--c4);}
+.col-hdr.good{color:var(--c3);}
+.risk-list{display:flex;flex-direction:column;gap:11px;}
+.ritem{display:flex;align-items:flex-start;gap:9px;font-family:'Aspekta',sans-serif;font-weight:400;font-size:12px;color:var(--mut);line-height:1.55;}
+.ritem-icon{color:var(--c4);flex-shrink:0;margin-top:2px;font-size:11px;}
+.hlist{display:flex;flex-direction:column;gap:6px;}
+.hitem{display:flex;align-items:flex-start;gap:10px;padding:7px 10px;border-radius:6px;cursor:pointer;transition:background .15s;}
+.hitem:hover{background:rgba(255,255,255,.03);}
+.hcheck{width:17px;height:17px;border:1.5px solid rgba(4,104,101,.4);border-radius:4px;flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:all .2s;margin-top:1px;}
+.hitem.done .hcheck{background:var(--c3);border-color:var(--c3);}
+.hcheck svg{width:10px;height:10px;stroke:#fff;opacity:0;transition:opacity .15s;}
+.hitem.done .hcheck svg{opacity:1;}
+.htxt{font-family:'Aspekta',sans-serif;font-weight:400;font-size:12px;color:var(--txt);line-height:1.5;transition:color .2s;}
+.hitem.done .htxt{color:var(--mut);text-decoration:line-through;}
+
+/* ── Edit mode FAB ── */
+.em-fab{position:fixed;bottom:28px;right:28px;background:var(--surf);border:1px solid var(--brd);border-radius:8px;color:var(--mut);padding:10px 18px;cursor:pointer;font-family:'Aspekta',sans-serif;font-weight:600;font-size:10px;letter-spacing:.1em;text-transform:uppercase;display:flex;align-items:center;gap:8px;transition:all .2s;z-index:200;box-shadow:0 4px 20px rgba(0,0,0,.5);}
+.em-fab:hover{border-color:var(--c1);color:var(--c1);}
+.em-fab.active{border-color:var(--c3);color:var(--c3);background:rgba(4,104,101,.1);}
+.em-fab svg{width:13px;height:13px;}
+
+/* ── Last update ── */
+.last-upd{font-family:'Aspekta',sans-serif;font-weight:400;font-size:10px;color:rgba(119,119,119,.45);display:inline-block;margin-left:12px;}
+
+/* ── Edit-only elements ── */
+.edit-only{display:none!important;}
+body.edit-mode .edit-only{display:flex!important;}
+.edit-only-block{display:none!important;}
+body.edit-mode .edit-only-block{display:block!important;}
+
+/* ── Add / Remove items ── */
+.item-rm{background:none;border:none;color:rgba(255,39,0,.35);cursor:pointer;font-size:15px;padding:0 2px;line-height:1;flex-shrink:0;transition:color .15s;}
+.item-rm:hover{color:var(--c1);}
+.add-row{padding-top:10px;}
+.add-inp{width:100%;background:var(--bg);border:1px dashed var(--brd);border-radius:4px;color:var(--txt);font-family:'Aspekta',sans-serif;font-size:12px;padding:7px 10px;outline:none;transition:border-color .15s;}
+.add-inp:focus{border-color:rgba(255,39,0,.3);}
+.add-inp::placeholder{color:var(--mut);}
+
+/* ── Editable text in edit mode ── */
+body.edit-mode .editable-txt{outline:1px dashed rgba(255,255,255,.08);border-radius:2px;cursor:text;padding:1px 3px;margin:-1px -3px;}
+body.edit-mode .editable-txt:focus{outline:1px solid rgba(255,39,0,.35);background:rgba(255,39,0,.04);}
+
+/* ── Toast ── */
+.save-toast{position:fixed;bottom:80px;right:28px;background:var(--surf);border:1px solid var(--c3);color:var(--c3);font-family:'Aspekta',sans-serif;font-weight:600;font-size:11px;letter-spacing:.1em;padding:10px 18px;border-radius:6px;z-index:999;opacity:0;transform:translateY(8px);transition:all .3s;pointer-events:none;}
+.save-toast.show{opacity:1;transform:translateY(0);}
+
+/* ── Hero ── */
+.hero-wrap{background:url('andes.jpg') center 30%/cover no-repeat;position:relative;min-height:420px;}
+.hero-wrap::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,rgba(10,10,10,.65) 0%,rgba(10,10,10,.15) 30%,rgba(10,10,10,0) 55%,#1F1F1F 100%);pointer-events:none;}
+.hero-wrap .page{position:relative;z-index:1;padding-bottom:48px;}
+.hero-wrap h1{text-shadow:0 2px 24px rgba(0,0,0,.8);}
+.hero-wrap .sub{color:#fff;background:rgba(0,0,0,.55);display:inline-block;padding:3px 10px;border-radius:4px;text-shadow:none;}
+.hero-wrap .badge{background:rgba(255,39,0,.18);border-color:rgba(255,39,0,.55);text-shadow:none;}
+.hero-wrap .wcard{background:rgba(20,20,20,.65);border-color:rgba(255,255,255,.1);backdrop-filter:blur(8px);}
+.hero-wrap .tcard{background:rgba(20,20,20,.65);border-color:rgba(255,255,255,.1);backdrop-filter:blur(8px);}
+.content-page{padding-top:32px;}
+</style>
+</head>
+<body>
+<div class="hero-wrap">
+<div class="page">
+
+  <!-- ── OKR Header ── -->
+  <div class="badge">Q3 2026 · Support Team</div>
+  <h1>OKR <em>Tracker</em></h1>
+  <p class="sub">Julio – Septiembre 2026 · Progreso ponderado por tópico<span class="last-upd" id="last-upd"></span></p>
+  <div class="wcard">
+    <span class="wlbl">Semana del quarter</span>
+    <div class="pips" id="pips"></div>
+    <span class="winfo" id="winfo"></span>
+  </div>
+  <div class="tcard">
+    <div class="tnum" id="tnum">0%</div>
+    <div class="tright">
+      <div class="tlbl">Progreso total del quarter</div>
+      <div class="btrack"><div class="bfill" id="bfill" style="width:0%"></div></div>
+      <div class="bdates"><span>9 Jul</span><span>30 Sep</span></div>
+    </div>
+  </div>
+
+</div>
+</div>
+<div class="page content-page">
+  <div id="list"></div>
+  <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:28px;align-items:center;">
+    <button class="rbtn" style="margin-top:0" onclick="resetAll()">&#8635; Reiniciar progreso OKRs</button>
+  </div>
+
+  <!-- ── Equipo & Responsabilidades ── -->
+  <div class="sec-hdr">Responsabilidades por OKR</div>
+  <div id="resp-list"></div>
+
+  <!-- ── Supuestos y Riesgos / Highlights ── -->
+  <div class="sec-hdr">Supuestos, Riesgos &amp; Highlights Q3</div>
+  <div class="two-col">
+    <div class="two-col-side">
+      <div class="col-hdr warn">⚠ Supuestos y riesgos</div>
+      <div class="risk-list" id="risk-list-body"></div>
+      <div class="add-row edit-only-block">
+        <input class="add-inp" id="risk-add-inp" placeholder="Agregar supuesto o riesgo… (Enter para guardar)">
+      </div>
+    </div>
+    <div class="two-col-side">
+      <div class="col-hdr good">✦ Highlights al cierre del Q3</div>
+      <div class="hlist" id="hlist"></div>
+      <div class="add-row edit-only-block">
+        <input class="add-inp" id="hl-add-inp" placeholder="Agregar highlight… (Enter para guardar)">
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<button class="em-fab" id="em-fab" onclick="toggleEditMode()">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+  Modo edición
+</button>
+<div id="toast" class="save-toast"></div>
+
+<script>
+/* ── OKR Data ── */
+var OKRS=[
+  {id:"o1",color:"#E89B7F",name:"Automate the Feedback Process using AI Capabilities",
+   topics:[
+    {w:20,def:0,name:"Relevamiento y definición",acts:[
+      {t:"Mapear criterios actuales del TL para detectar error/oportunidad"},
+      {t:"Relevar estructura del CRM actual (atributos/tipificaciones exportables)"},
+      {t:"Relevar la biblioteca de conocimiento existente (documentos, dónde están, qué tan ordenados)"},
+      {t:"Revisar el código del site actual para ver dónde encaja el nuevo módulo"},
+      {t:"Reunion AIBUILDERS para entender su framework de evaluación de calidad"},
+      {t:"Definir qué piezas son reutilizables (¿componentes de código? ¿lógica de scoring?)"}
+    ]},
+    {w:20,def:0,name:"Diseño",acts:[
+      {t:"Definir el esquema de filtros (tipificación, operador, fecha)"},
+      {t:"Definir cómo se estructura la conexión al CRM (¿API disponible o hay que trabajar con exports/CSV al principio?)"},
+      {t:"Definir cómo se conecta la biblioteca de conocimiento (Drive vía API es viable con Claude Code)"},
+      {t:"Diseñar el módulo dentro del site existente"}
+    ]},
+    {w:30,def:0,name:"Desarrollo",acts:[
+      {t:"Conexión a biblioteca de conocimiento (Drive)"},
+      {t:"Conexión a datos del CRM (empezando simple: export manual/CSV si no hay API, para no bloquear el MVP)"},
+      {t:"Lógica de filtros"},
+      {t:"Lógica de matching caso—conocimiento (usando IA vía API, similar a cómo armaste el site)"},
+      {t:"Sugerencias para el 1:1"},
+      {t:"Señales de autonomía (a partir de lo que loguea el CRM/site)"},
+      {t:"Integración visual dentro del site"}
+    ]},
+    {w:15,def:0,name:"Validación",acts:[
+      {t:"Testing con casos reales, comparando contra lo que encontraría un TL manualmente"},
+      {t:"Ajustes de criterios"},
+      {t:"Feedback sobre si el resumen sirve"}
+    ]},
+    {w:15,def:0,name:"Rollout",acts:[
+      {t:"Roll out y prueba interna"},
+      {t:"Ajustes"},
+      {t:"Rollout general"},
+      {t:"Mini-guía de uso"}
+    ]}
+  ]},
+  {id:"o2",color:"#7FB069",name:"Scale Anomaly Center",
+   topics:[
+    {w:25,def:0,name:"Relevamiento, Definición de Criterios y Estructura de Datos",acts:[
+      {t:"Clasificar los errores críticos del Exception Reporter y Probador de Nodos"},
+      {t:"Diseñar la estructura de la base de datos de anomalías (ID, Proveedor, Tipo de Error, Estado, Operador, Notas de cierre, Timestamps)"},
+      {t:"Mapear remitentes oficiales y confeccionar el listado de palabras clave críticas (embudos de entrada)"},
+      {t:"Definir umbrales para alertar y relevar la estructura de correos de AWS y Exception Reporter"}
+    ]},
+    {w:25,def:0,name:"Diseño de Arquitectura e Interfaces",acts:[
+      {t:"Sacar el centro actual de Intercom y moverlo a su propio sitio/app"},
+      {t:"Diseñar estructura de canales de Slack (por severidad) y plantillas de mensajes de apertura/cierre"},
+      {t:"Diagramar el flujo lógico del filtro de correos previo a la API de Gemini"},
+      {t:"Diseñar el panel de registro (interfaz del Gem) y la base de datos de seguimiento"}
+    ]},
+    {w:30,def:0,name:"Desarrollo e Integración",acts:[
+      {t:"Programar el conector (Apps Script/Make) con capa de filtrado previo sobre la bandeja de Help Desk"},
+      {t:"Conectar la API de Gemini para traducir logs filtrados y enviarios como alerta a Slack"},
+      {t:"Desarrollar el Gem-formulario en el Site para registro manual de incidentes (guarda en Sheets)"},
+      {t:"Programar el disparador de ciclo de vida (Slack se notifica al abrir/cerrar un incidente)"}
+    ]},
+    {w:20,def:0,name:"Configuración de Gem, Pruebas y Lanzamiento",acts:[
+      {t:"Configurar el Gem asistente en Sites para el registro manual del operador"},
+      {t:"Testear con correos simulados (críticos y culinarios)"},
+      {t:"Ajustar sensibilidad de filtros según resultados de las pruebas"},
+      {t:"Marcha blanca con operadores y despliegue general"}
+    ]}
+  ]},
+  {id:"o3",color:"#E8A4BF",name:"Produce video-based training materials FS",
+   topics:[
+    {w:30,def:0,name:"Definición de contenidos",acts:[
+      {t:"Definir objetivos y alcance de cada video"},
+      {t:"Identificar y priorizar temas de capacitación en video"}
+    ]},
+    {w:40,def:0,name:"Producción de videos",acts:[
+      {t:"Armar guiones u outlines"},
+      {t:"Grabar y editar videos. Revisar videos existentes"}
+    ]},
+    {w:15,def:0,name:"Publicación y organización",acts:[
+      {t:"Organizar contenidos por temática en un único documento con todo el contenido"},
+      {t:"Vincular videos con documentación existente"}
+    ]},
+    {w:15,def:0,name:"Comunicación y adopción",acts:[
+      {t:"Comunicar y promover el uso de los videos. Capacitar al equipo en su utilización"},
+      {t:"Recoger feedback y realizar ajustes"}
+    ]}
+  ]}
+];
+
+/* ── OKR Logic ── */
+var KEY="okr_q3_2026_v1",S={},GKEY="okr_global_q3_v1",GS={"o1":0,"o2":0,"o3":0};
+function load(){try{var r=localStorage.getItem(KEY);if(r)S=JSON.parse(r);}catch(e){}}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(S));}catch(e){}}
+function gload(){try{var r=localStorage.getItem(GKEY);if(r)GS=JSON.parse(r);}catch(e){}}
+function gsave(){try{localStorage.setItem(GKEY,JSON.stringify(GS));}catch(e){}}
+function gk(oi,ti){return oi+"_"+ti;}
+function getPct(oi,ti){var k=gk(oi,ti);return S[k]!==undefined?S[k]:OKRS.find(function(o){return o.id===oi;}).topics[ti].def;}
+function setPct(oi,ti,v){S[gk(oi,ti)]=v;save();}
+function okrPct(oi){if(GS[oi]!==undefined)return Math.round(GS[oi]);var okr=OKRS.find(function(o){return o.id===oi;});return Math.round(okr.topics.reduce(function(s,t,i){return s+(getPct(oi,i)/100)*t.w;},0));}
+function totalPct(){return Math.round(OKRS.reduce(function(s,o){return s+okrPct(o.id);},0)/OKRS.length);}
+function getStatus(p){
+  var start=new Date("2026-07-09"),end=new Date("2026-09-30"),now=new Date();
+  var el=Math.max(0,Math.min(1,(now-start)/(end-start)));
+  var exp=el*100;
+  if(p>=exp-5)return"on";if(p>=exp-20)return"risk";return"off";
+}
+var SL={on:"On Track",risk:"At Risk",off:"Off Track"};
+function updateTotal(){
+  var p=totalPct();
+  document.getElementById("tnum").textContent=p+"%";
+  document.getElementById("bfill").style.width=p+"%";
+}
+function updateOkr(oi){
+  var p=okrPct(oi),s=getStatus(p);
+  var pe=document.getElementById("op_"+oi),be=document.getElementById("ob_"+oi),se=document.getElementById("os_"+oi);
+  if(pe)pe.textContent=p+"%";
+  if(be)be.style.width=p+"%";
+  if(se){se.textContent=SL[s];se.className="sbdg s-"+s;}
+  updateTotal();
+}
+function render(){
+  var open=OKRS.map(function(o){return document.getElementById("c_"+o.id)&&document.getElementById("c_"+o.id).classList.contains("open");});
+  var list=document.getElementById("list");list.innerHTML="";
+  OKRS.forEach(function(okr){
+    var p=okrPct(okr.id),s=getStatus(p);
+    var card=document.createElement("div");card.className="ocard";card.id="c_"+okr.id;
+    var topicsHTML=okr.topics.map(function(t,ti){
+      var val=Math.round(getPct(okr.id,ti));
+      return '<div class="topic"><div class="thead">'
+        +'<span class="tname">'+t.name+'</span>'
+        +'<span class="tweight">peso '+t.w+'%</span>'
+        +'<span class="tval" id="tv_'+okr.id+'_'+ti+'" style="color:'+okr.color+'">'+val+'%</span>'
+        +'</div></div>';
+    }).join("");
+    card.innerHTML='<div class="ohead" onclick="toggle(\''+okr.id+'\')">'
+      +'<div class="odot" style="background:'+okr.color+'"></div>'
+      +'<div class="ohb"><div class="otitle">'+okr.name+'</div>'
+      +'<div class="ometa"><span class="opct" id="op_'+okr.id+'" style="color:'+okr.color+'">'+p+'%</span>'
+      +'<span class="sbdg s-'+s+'" id="os_'+okr.id+'">'+SL[s]+'</span></div></div>'
+      +'<svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div>'
+      +'<div class="obarrow"><div class="otrack"><div class="ofill" id="ob_'+okr.id+'" style="width:'+p+'%;background:'+okr.color+'"></div></div></div>'
+      +'<div class="topics" id="tp_'+okr.id+'">'+topicsHTML+'</div>';
+    if(open[OKRS.indexOf(okr)])card.classList.add("open");
+    list.appendChild(card);
+  });
+  updateTotal();
+  renderWeeks();
+}
+function toggle(oi){document.getElementById("c_"+oi).classList.toggle("open");}
+function resetAll(){
+  if(!confirm("Reiniciar todo el progreso de OKRs?"))return;
+  S={};save();render();
+}
+function renderWeeks(){
+  var start=new Date("2026-07-09"),end=new Date("2026-09-30"),now=new Date();
+  var TOTAL=13,elapsed=Math.max(0,(now-start)/(1000*60*60*24*7));
+  var done=now>end;
+  var cur=done?TOTAL:Math.min(Math.floor(elapsed)+1,TOTAL);
+  var pips=document.getElementById("pips");pips.innerHTML="";
+  for(var i=1;i<=TOTAL;i++){
+    var d=document.createElement("div");
+    d.className="pip"+(done||i<cur?" past":i===cur?" cur":"");
+    pips.appendChild(d);
+  }
+  document.getElementById("winfo").textContent=done?"Q3 finalizado · 9 Jul – 30 Sep 2026":"Semana "+cur+" de "+TOTAL+" · "+Math.max(0,TOTAL-cur)+" sem. restantes";
+}
+
+/* ── Responsabilidades ── */
+var RKEY="resp_q3_2026_v1",RA={};
+var OKR_OWNERS={o1:{label:"Owner: Anto",cls:"o-anto"},o2:{label:"Owner: Anto & Ale",cls:"o-all"},o3:{label:"Owner: Ale",cls:"o-ale"}};
+function rload(){try{var r=localStorage.getItem(RKEY);if(r)RA=JSON.parse(r);}catch(e){}}
+function rsave(){try{localStorage.setItem(RKEY,JSON.stringify(RA));}catch(e){}}
+function rk(oi,ti,ai){return oi+"_"+ti+"_"+ai;}
+function getResp(oi,ti,ai){var k=rk(oi,ti,ai);return RA[k]||"";}
+function setResp(oi,ti,ai,val){RA[rk(oi,ti,ai)]=val;rsave();}
+
+function renderResp(){
+  var el=document.getElementById("resp-list");if(!el)return;el.innerHTML="";
+  OKRS.forEach(function(okr){
+    var ow=OKR_OWNERS[okr.id];
+    var card=document.createElement("div");card.className="rsp-card";card.id="rc_"+okr.id;
+    var topicsHTML="";
+    okr.topics.forEach(function(t,ti){
+      var tid="rt_"+okr.id+"_"+ti;
+      var rows="";
+      t.acts.forEach(function(a,ai){
+        var val=getResp(okr.id,ti,ai);
+        rows+='<div class="rsp-row">'
+          +'<div class="rsp-task">'+a.t+'</div>'
+          +'<input class="rsp-inp" type="text" placeholder="Asignar responsable" value="'+val+'"'
+          +' data-oi="'+okr.id+'" data-ti="'+ti+'" data-ai="'+ai+'">'
+          +'</div>';
+      });
+      topicsHTML+='<div class="rsp-topic" id="'+tid+'">'
+        +'<div class="rsp-topic-hdr" onclick="document.getElementById(\''+tid+'\').classList.toggle(\'open\')">'
+        +t.name
+        +'<svg class="rsp-topic-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>'
+        +'</div>'
+        +'<div class="rsp-topic-rows">'+rows+'</div>'
+        +'</div>';
+    });
+    card.innerHTML='<div class="rsp-head" onclick="rtoggle(\''+okr.id+'\')">'
+      +'<div class="rsp-dot" style="background:'+okr.color+'"></div>'
+      +'<div class="rsp-title">'+okr.name+'</div>'
+      +'<span class="rsp-owner '+ow.cls+'">'+ow.label+'</span>'
+      +'<svg class="rsp-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>'
+      +'</div>'
+      +'<div class="rsp-body">'+topicsHTML+'</div>';
+    el.appendChild(card);
+  });
+  el.querySelectorAll(".rsp-inp").forEach(function(inp){
+    inp.addEventListener("change",function(){
+      setResp(inp.dataset.oi,parseInt(inp.dataset.ti),parseInt(inp.dataset.ai),inp.value.trim());
+    });
+  });
+}
+function rtoggle(oi){document.getElementById("rc_"+oi).classList.toggle("open");}
+
+/* ── Risks ── */
+var RKKEY="risks_q3_v1",RISKS=null;
+var DEFAULT_RISKS=[
+  "La integración con el CRM puede requerir más coordinación si no hay API disponible.",
+  "El matching caso—conocimiento requiere ajustes iterativos según feedback real.",
+  "La disponibilidad de tiempo para la producción de videos depende del flujo operativo del equipo.",
+  "La escalabilidad del Anomaly Center depende de la correcta configuración de filtros iniciales.",
+  "Las vacaciones y days off pueden impactar el timeline de entrega.",
+  "La adopción de las nuevas herramientas depende de la capacitación efectiva del equipo."
+];
+function rkload(){try{var r=localStorage.getItem(RKKEY);if(r)RISKS=JSON.parse(r);}catch(e){}}
+function rksave(){try{localStorage.setItem(RKKEY,JSON.stringify(RISKS));}catch(e){}}
+function getRisks(){return RISKS||DEFAULT_RISKS;}
+function renderRisks(){
+  var el=document.getElementById("risk-list-body");if(!el)return;
+  el.innerHTML="";
+  getRisks().forEach(function(r,i){
+    var row=document.createElement("div");row.className="ritem";
+    row.innerHTML='<span class="ritem-icon">⚠</span>'
+      +'<span class="editable-txt" contenteditable="false" data-rk="'+i+'" onblur="saveRiskText(this,'+i+')">'+r+'</span>'
+      +'<button class="item-rm edit-only" onclick="removeRisk('+i+')">×</button>';
+    el.appendChild(row);
+  });
+  var inp=document.getElementById("risk-add-inp");
+  if(inp){inp.onkeydown=function(e){if(e.key==="Enter"&&inp.value.trim()){addRisk(inp.value.trim());inp.value="";}};}
+}
+function saveRiskText(el,i){
+  if(!RISKS)RISKS=DEFAULT_RISKS.slice();
+  RISKS[i]=el.textContent.trim();rksave();markUpdate();
+}
+function removeRisk(i){
+  if(!RISKS)RISKS=DEFAULT_RISKS.slice();
+  RISKS.splice(i,1);rksave();renderRisks();markUpdate();
+}
+function addRisk(txt){
+  if(!RISKS)RISKS=DEFAULT_RISKS.slice();
+  RISKS.push(txt);rksave();renderRisks();markUpdate();
+}
+
+/* ── Highlights ── */
+var HIGHLIGHTS=[
+  {id:"h1",t:"Módulo de Feedback con IA integrado y operativo en el site"},
+  {id:"h2",t:"Anomaly Center escalado con automatización de alertas en Slack"},
+  {id:"h3",t:"Videos de capacitación producidos y publicados en repositorio compartido"},
+  {id:"h4",t:"Equipo capacitado en nuevas herramientas y flujos de trabajo"},
+  {id:"h5",t:"Documentación de procesos actualizada y accesible"}
+];
+var HKEY="highlights_q3_v1",HD={};
+var HLKEY="highlights_custom_q3_v1",HL=null;
+function hload(){try{var r=localStorage.getItem(HKEY);if(r)HD=JSON.parse(r);}catch(e){}}
+function hlload(){try{var r=localStorage.getItem(HLKEY);if(r)HL=JSON.parse(r);}catch(e){}}
+function hsave(){try{localStorage.setItem(HKEY,JSON.stringify(HD));}catch(e){}}
+function hlsave(){try{localStorage.setItem(HLKEY,JSON.stringify(HL));}catch(e){}}
+function getHL(){return HL||HIGHLIGHTS.map(function(h){return{id:h.id,t:h.t};});}
+function renderHighlights(){
+  var el=document.getElementById("hlist");if(!el)return;el.innerHTML="";
+  getHL().forEach(function(h,i){
+    var done=!!HD[h.id];
+    var item=document.createElement("div");item.className="hitem"+(done?" done":"");item.id="hi_"+h.id;
+    item.innerHTML='<div class="hcheck" onclick="toggleHL(\''+h.id+'\')">'
+      +'<svg viewBox="0 0 12 12" fill="none" stroke-width="2.5"><polyline points="2 6 5 9 10 3"/></svg></div>'
+      +'<span class="htxt editable-txt" contenteditable="false" onblur="saveHLText(this,'+i+')">'+h.t+'</span>'
+      +'<button class="item-rm edit-only" onclick="removeHL('+i+')">×</button>';
+    el.appendChild(item);
+  });
+  var inp=document.getElementById("hl-add-inp");
+  if(inp){inp.onkeydown=function(e){if(e.key==="Enter"&&inp.value.trim()){addHL(inp.value.trim());inp.value="";}};}
+}
+function toggleHL(id){HD[id]=!HD[id];hsave();var el=document.getElementById("hi_"+id);if(el)el.classList.toggle("done",!!HD[id]);markUpdate();}
+function saveHLText(el,i){var list=getHL();if(!HL)HL=list.slice();HL[i].t=el.textContent.trim();hlsave();markUpdate();}
+function removeHL(i){if(!HL)HL=getHL().slice();HL.splice(i,1);hlsave();renderHighlights();markUpdate();}
+function addHL(txt){if(!HL)HL=getHL().slice();HL.push({id:"h"+Date.now(),t:txt});hlsave();renderHighlights();markUpdate();}
+
+/* ── Last update ── */
+var LUKEY="last_upd_q3_v1";
+function markUpdate(){
+  var now=new Date();
+  var str="· Actualizado "+now.toLocaleDateString("es-AR",{day:"numeric",month:"short"})+" "+now.toLocaleTimeString("es-AR",{hour:"2-digit",minute:"2-digit"});
+  localStorage.setItem(LUKEY,str);
+  var el=document.getElementById("last-upd");if(el)el.textContent=str;
+}
+function loadLastUpd(){var v=localStorage.getItem(LUKEY);if(v){var el=document.getElementById("last-upd");if(el)el.textContent=v;}}
+
+/* ── Edit mode ── */
+var EDIT_MODE=false;
+function toggleEditMode(){
+  EDIT_MODE=!EDIT_MODE;
+  document.body.classList.toggle("edit-mode",EDIT_MODE);
+  var fab=document.getElementById("em-fab");
+  if(EDIT_MODE){
+    fab.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Salir de edición';
+    fab.classList.add("active");
+    document.querySelectorAll(".editable-txt").forEach(function(el){el.contentEditable="true";});
+    showToast("Modo edición activo — hacé clic en cualquier texto para editarlo");
+  } else {
+    fab.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg> Modo edición';
+    fab.classList.remove("active");
+    document.querySelectorAll(".editable-txt").forEach(function(el){el.contentEditable="false";});
+    showToast("Cambios guardados ✓");
+  }
+}
+function showToast(msg){
+  var t=document.getElementById("toast");t.textContent=msg;t.classList.add("show");
+  setTimeout(function(){t.classList.remove("show");},2500);
+}
+
+rkload();hload();hlload();rload();
+load();gload();render();renderResp();renderRisks();renderHighlights();loadLastUpd();
+</script>
+</body>
+</html>
